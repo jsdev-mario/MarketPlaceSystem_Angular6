@@ -1,0 +1,252 @@
+@media screen and (max-width: 768px){
+    #menu-lists{
+        padding: 0 !important;
+    }
+}
+
+.price{
+    padding-top: 0.4rem;
+}
+
+.price_wrap{
+    display: flex;
+    flex-basis: 100px;
+}
+
+.menu_details{
+    max-width: calc(100% - 110px);
+}
+
+.price_wrap .price{
+    text-align: right;
+    width: 70px;
+}
+
+.price_wrap .price p{
+    padding: 0;
+    margin: 0;
+}
+
+.add-btn{
+    font-size: 1.5rem;
+    width: 30px;
+    text-align: right;
+}
+
+.choice_dlg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2000;
+    background-color: rgba(0,0,0,.3);
+}
+
+.choice_dlg .dlg_content{
+    position: absolute;
+    /* background-color: #F6931D; */
+    padding: 1.5rem 1rem;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    width: 280px;
+    box-shadow: black 0px 0px 12px -2px;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+}
+
+.choice-btn-group{
+    width: 100%;
+    display: flex;
+}
+
+.choice-btn{
+    flex-grow: 1;
+    width: 40px;
+}
+
+.choice-count{
+    width: 100%;
+    height: 40px;
+    border: 2px solid rgb(184, 184, 184);
+}
+
+#menu-lists{
+    padding: 0 0.5rem;
+}
+
+.menu-list{
+    background-color: #f3f2f2;
+    margin-bottom: 0.5rem;
+    padding: 0.2rem 0.7rem;
+}
+
+div.menu-list:last-child{
+    margin-bottom: 0rem !important;
+}
+
+.subcategory_name{
+    font-weight: bolder;
+}
+
+.description{
+    font-family: 'amble-light' !important;
+}
+
+.header-butcher-logo-wrap{
+    position: relative;
+    width: 100%;
+    height: 125px;
+}
+
+.header-butcher-logo-wrap img{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.header-butcher-deflogo{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    top: 50%;
+    left: 50%;
+    padding: 0;
+    background-color: #F6931D;
+    transform: translate(-50%, -50%)
+}
+
+.header-butcher-deflogo p{
+    padding-top: 15px;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'amble-light' !important;
+}
+
+.shop_intro_wrap p{
+    margin: 0;
+}
+
+.shop_intro_wrap{
+    background-color: #f3f2f2;
+    padding-bottom: 0.7rem;
+}
+
+.tab_wrap{
+    display: flex;
+}
+
+.tab{
+    flex: 1;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin: 5px;
+    background-color: #dfdfdf;
+}
+
+.sel_tab{
+    background-color: white;
+}
+
+#about_us_section{
+    padding: 0 0.5rem;
+}
+
+.why_busy_content{
+    padding: 1rem;
+    background-color: #f3f2f2;
+}
+
+.why_busy_content p{
+    margin-bottom: 0;
+}
+
+.shop_map_wrap{
+    padding: 1rem;
+    background-color: #f3f2f2;
+    width: 100%;
+}
+
+.shop_map_wrap p{
+    padding: 0;
+    margin: 0;
+}
+
+.shop_opentime_wrap{
+    padding: 1rem;
+    background-color: #f3f2f2;
+    width: 100%;
+}
+
+.shop_opentime_wrap p{
+    padding: 0;
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+/**** ng select cusomize ****/
+:host /deep/ ng-select .ng-control{
+    background-color: transparent !important;
+    height: 38px !important;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select .ng-value{
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select{
+    width: calc(100% + 4px) !important;
+    margin-left: -2px !important;
+}
+
+
+:host /deep/ ng-select .ng-input{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.marked{
+    background-color: #fcb35f !important;
+}
+
+:host /deep/ ng-select .ng-option{
+    background-color: #F6931D !important;
+    color: white !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel{
+    background-color: #F6931D !important;
+    border: none !important;
+}
+
+:host /deep/ ng-select .ng-arrow{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-clear{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-value{
+    width: 100% !important;
+}
+
+/** rating **/
+
+:host /deep/ star-rating .rating.color-positive .star-container .star svg{
+    fill: #F6931D!important;
+  }
+:host /deep/ star-rating .rating.color-default .star-container .star svg{
+    fill: #F6931D!important;
+}

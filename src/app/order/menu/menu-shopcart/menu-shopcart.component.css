@@ -1,0 +1,116 @@
+#shop-cart {
+    padding: 0 0.5rem;
+}
+
+.order-item {
+    display: flex;
+    padding: 0.3rem;
+    background-color: lightgrey;
+    margin-bottom: 0.5rem;
+}
+
+.item-details {
+    width: 75%;
+    padding-left: 0.5rem;   
+    text-align: right; 
+}
+
+.order-items {
+    border-bottom: 2px dashed #ff000026;
+    padding-bottom: 0.5rem;
+}
+
+.price_content svg{
+    cursor: pointer;
+}
+
+.price_content{
+    display: flex;
+    width: 80px;
+}
+
+.price_content .price{
+    width: 55px;
+}
+
+.price_content .control_btn{
+    text-align: right;
+    width: 25px;
+}
+
+.delivery_option_wrap{
+    display: flex
+}
+
+.delivery_option_wrap .option{
+    flex: 1;
+}
+
+.option p{
+    margin-bottom: 0;
+}
+
+.min_price_wrap p{
+    padding: 0;
+    margin: 0;
+}
+
+.min_priceintor_wrap small{
+    display: block;
+    line-height: 15px;
+}
+
+.save_wrap small{
+    display: block;
+    line-height: 15px;
+}
+
+/**** ng select cusomize ****/
+:host /deep/ ng-select .ng-control{
+    background-color: transparent !important;
+    height: 38px !important;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select .ng-value{
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select{
+    width: calc(100% + 4px) !important;
+    margin-left: -2px !important;
+}
+
+
+:host /deep/ ng-select .ng-input{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.marked{
+    background-color: #fcb35f !important;
+}
+
+:host /deep/ ng-select .ng-option{
+    background-color: #F6931D !important;
+    color: white !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel{
+    background-color: #F6931D !important;
+    border: none !important;
+    /* margin-left: -2px!important; */
+    /* margin-right: -4px!important; */
+    
+}
+
+:host /deep/ ng-select .ng-arrow{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-clear{
+    display: none !important;
+}

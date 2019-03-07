@@ -1,0 +1,55 @@
+<div class="container">
+    <h2 class="color-orange text-left mb-4">Have you read the FAQs?</h2>
+    <p>
+        Before contacting us, <a class="color-danger">please check our FAQs page</a> for an instant answer. 
+        Our FAQ page provides detailed responses to the most commonly asked questions.
+    </p>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="color-orange text-left my-4">How we can help?</h2>
+            <p>
+                We are happy to answer any question you may have. 
+                Fill out the from below and we will respond as soon as we can. 
+                A member of the team will contact you within 48hours.
+            </p>
+            <div class="form-group group">
+                <label for="name" class="">Your Name<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                <input type="text" class="mt-input" name="name" id="name" placeholder="Please input name" [(ngModel)]="this.name">
+                </div>
+            <div class="form-group group">
+                <label for="email"class="">Your Email<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                <input type="text" class="mt-input" name="email" id="email" placeholder="Please input email" [(ngModel)]="this.email">
+            </div>
+            <div class="form-group group">
+                <label for="subject"class="">Subject</label>
+                <input type="text" class="mt-input" name="subject" id="subject" placeholder="Please input subject" [(ngModel)]="this.subject">
+            </div>
+            <div class="form-group group">
+                <label for="message"class="">Message<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                <textarea class="mt-textarea" name="message" id="message" row="6" [(ngModel)]="this.message" placeholder="Please input message"></textarea>
+            </div>
+            <button type="button" name="" id="" class="btn mt-btn btn-lg btn-block" (click)="send()">SEND</button>
+        </div>
+        <div class="col-md-6">
+            <h2 class="color-orange text-left mt-4 mb-5">Contact us</h2>
+            <div class="p-4 bg-lightgray mb-4">
+                <p>Email</p>
+                <p class="color-gray">admin@meat-hut.com</p>
+            </div>
+            <div class="p-4 bg-lightgray mb-4">
+                <p>Phone</p>
+                <p class="color-gray">0800 234 2344</p>
+            </div>
+            <div class="p-4 bg-lightgray mb-4">
+                <p>Timings</p>
+                <p class="color-gray">9:00 AM till midnight, 7 days a week</p>
+            </div>
+            <div class="d-flex justify-content-end mt-5">
+                <h5 class="pt-3 pr-2">connect:</h5>
+                <a href="https://facebook.com"><img src="assets/images/facebook_icon.png" class="mr-2" style="width: 50px; height: 50px;" alt=""></a>
+                <a href="https://twitter.com"><img src="assets/images/twitter_icon.png" class="mr-2" style="width: 50px; height: 50px;" alt=""></a>
+                <a href="https://instagram.com"><img src="assets/images/instagram_icon.png" class="mr-2" style="width: 50px; height: 50px;" alt=""></a>
+            </div>
+        </div>
+    </div>
+</div>

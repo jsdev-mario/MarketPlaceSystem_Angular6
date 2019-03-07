@@ -1,0 +1,43 @@
+.login input {
+    height: 50px;
+}
+
+.logo-name{
+    width: 250px;
+    height: 50px;
+}
+
+.login a{
+    text-decoration: none;
+}
+
+.login button{
+    height: 50px;
+    font-size: 1rem;
+}
+
+h4{
+    font-size: 2rem;
+}
+
+.pass_eye{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 50px;
+    z-index: 200;
+}
+
+.pass_text_group{
+    position: relative;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,108 @@
+<h4>Grocery List</h4>
+<div class="row font-2" id="cat-list-section">
+    <div class="col-xl-5" id="cat-list-wrap">
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Main item list</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let category of cat_service.categories; let i = index" (click)="categorySelected(category)" [ngClass]="{'active': category === cat_service.selected_category}">
+                        <div>{{category.name}}</div>
+                        <div>
+                            <i class="fa fa-angle-right text-right color-orange"></i>
+                        </div>
+                        <div class="control_group" *ngIf="!isExtractCat(category)">
+                            <a (click)="extractCategory(i, $event)">
+                                <i class="fa fa-plus-circle mx-2"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Sub category</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let subcategory of cat_service.selected_subcategories let i = index" (click)="subcategorySelected($event, subcategory)" [ngClass]="{'active': subcategory === cat_service.selected_subcategory}">
+                        <div>{{subcategory.name}}</div>
+                        <div>
+                            <i class="fa fa-angle-right text-right color-orange"></i>
+                        </div>
+                        <div class="control_group" *ngIf="!isExtractSubCat(i)">
+                            <a (click)="extractSubCat(i, $event)">
+                                <i class="fa fa-plus-circle mx-2"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-7" id="choice-list-wrap">
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Order choice1</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let choice of cat_service.selected_choices1; let i = index" (click)="choiceSelected($event, choice)" [ngClass]="{'active': choice === cat_service.selected_choice1}">
+                        {{choice.name}}
+                        <div class="control_group" *ngIf="!isExtractChoice(choice)">
+                            <a (click)="extractChoice(choice, $event)">
+                                <i class="fa fa-plus-circle mx-2"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Order choice2</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let choice of cat_service.selected_choices2" (click)="choiceSelected($event, choice)" [ngClass]="{'active': choice === cat_service.selected_choice2}">
+                        {{choice.name}}
+                        <div class="control_group" *ngIf="!isExtractChoice(choice)">
+                            <a (click)="extractChoice(choice, $event)">
+                                <i class="fa fa-plus-circle mx-2"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Order choice3</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let choice of cat_service.selected_choices3" (click)="choiceSelected($event, choice)" [ngClass]="{'active': choice === cat_service.selected_choice3}">
+                        {{choice.name}}
+                        <div class="control_group" *ngIf="!isExtractChoice(choice)">
+                            <a (click)="extractChoice(choice, $event)">
+                                <i class="fa fa-plus-circle mx-2"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Order choice4</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let choice of cat_service.selected_choices4" (click)="choiceSelected($event, choice)" [ngClass]="{'active': choice === cat_service.selected_choice4}">
+                        {{choice.name}}
+                        <div class="control_group" *ngIf="!isExtractChoice(choice)">
+                            <a (click)="extractChoice(choice, $event)">
+                                <i class="fa fa-plus-circle mx-2"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-12">
+        <small class="color-orange font-2">Note: If you wish to add a grocery item that isn’t listed, please <a class="point" (click)="gotoContactUs()">contact us</a></small>
+    </div>
+</div>

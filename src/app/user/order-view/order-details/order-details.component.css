@@ -1,0 +1,8 @@
+.delivery_time_note img{
+    height: 60px;
+}
+
+.order_items table th, .order_items table td{
+    margin: 0;
+    padding: 3px 10px;
+}

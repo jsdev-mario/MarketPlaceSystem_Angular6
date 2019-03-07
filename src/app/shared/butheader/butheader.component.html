@@ -1,0 +1,43 @@
+<header>
+    <div class="but_header_toplog_section">
+        <div class="notification_content ml-2">
+            <div class="d-flex point" (click)="gotoDash()">
+                <i class="fa fa-bell text-light fa-2x"></i>
+                <span class="badge badge-pill badge-danger badge_black"  *ngIf="butbadge_count > 0">{{butbadge_count}}</span>
+            </div>
+        </div>
+        <div class="right_log point" (click)="status_service.expend_menu = !status_service.expend_menu">
+            <div class="butcher_deflogo" *ngIf="!user.shop || !user.shop.shop_logo">
+                <p>{{displayAbbreName()}}</p>
+            </div>
+            <img [src]="user.shop.shop_logo" alt="" *ngIf="user.shop && user.shop.shop_logo"> 
+        </div>
+        <img src="assets/images/header_logo.png" class="top_log_content" alt="">
+    </div>
+    <div class="but_topmenu_section">
+        <div *ngFor="let item of but_menus; let i=index" [ngClass]="{'activ_fluidmenu': sel_butmenu === i}" (click)="selectButMenu(i)">{{item}}</div>
+        <div  class="point" (click)="gotoDash()">
+            <i class="fa fa-bell text-danger fa-2x"></i>
+            <span class="badge badge-pill badge-danger badge_red" *ngIf="butbadge_count > 0">{{butbadge_count}}</span>
+        </div>
+    </div>
+    <ul class="but_menu_wrap text-left" *ngIf="status_service.expend_menu">
+        <li *ngFor="let item of but_menus; let i=index" class="point" [ngClass]="{'activ_fluidmenu': sel_butmenu === i}" (click)="selectButMenu(i)"><a>{{item}}</a></li>
+    </ul>
+    <div class="but_header_info">
+        <div class="logo_section">
+            <div class="butcher_deflogo" *ngIf="!user.shop || !user.shop.shop_logo">
+                <p>{{displayAbbreName()}}</p>
+            </div>
+            <img [src]="user.shop.shop_logo" alt="" *ngIf="user.shop && user.shop.shop_logo"> 
+            <star-rating [starType]="'svg'" [rating]="user.shop.rate" [readOnly]="true"></star-rating>
+            <h5 class="text-light">Welcome back {{user.shop.shop_name}}</h5>
+        </div>
+        <div class="but_info_section">
+            <p>{{getTodayDate()}}</p>
+            <p>{{getShopOpenInfo()}}</p>
+            <p>{{getShopDeliveryInfo()}}</p>
+        </div>
+    </div>
+    <audio id="alert" src="assets/audio/alert.mp3" preload="auto"></audio>
+</header>

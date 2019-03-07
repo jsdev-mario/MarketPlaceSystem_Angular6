@@ -1,0 +1,69 @@
+<div class="container login">
+    <h2 *ngIf="user_type === 'butcher'">Butcher Log in</h2>
+    <h2 *ngIf="user_type === 'customer'">Log in</h2>
+    <div class="row">
+        <div class="col-md-6 col-lg-4 offset-lg-4 offset-md-3">
+            <div class="form-group">
+                <input type="email" class="mt-input" name="email" id="email" placeholder="Email Address" [(ngModel)]="email" 
+                [ngClass]="validation.textInputValidate(email)">
+            </div>
+            <div class="form-group pass_text_group">
+                <input [type]="passInputType()" class="mt-input" name="password" id="password" placeholder="Password" [(ngModel)]="password"
+                [ngClass]="validation.textInputValidate(password)">
+                <button class="pass_eye point" (click)="show_pass = true" *ngIf="!show_pass"><i class="fa fa-eye-slash color-orange"></i></button>
+				<button class="pass_eye point" (click)="show_pass = false" *ngIf="show_pass"><i class="fa fa-eye color-orange"></i></button>
+            </div>
+            <label class="checkbox-wrap" >
+                <span [ngClass]="{'color-orange': remember}">Remember me</span>
+                <input type="checkbox" [checked]="remember" [(ngModel)]="remember">
+                <span class="checkmark"></span>
+            </label>
+            <button type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#forgotModal" id="forgotdlgbtn"></button>            
+            <p class="text-danger font-3 point mt-2" onClick="$('#forgotdlgbtn').click();">Forgot your password?</p>
+            <div class="mb-3">
+                <re-captcha (resolved)="resolved($event)" siteKey="6LfquVYUAAAAADkWdSc1HDJIJvn-lDtUnJIgtEWs"></re-captcha>
+            </div>
+            <button type="button" name="sign-btn" id="sign-btn" class="btn mt-btn btn-block text-light mb-3" (click)="signIn()">LOG IN</button>
+            <button type="button" name="fb-sign-btn" id="fb-sign-btn" class="fb_btn mb-4" (click)="facebookSignIn()" *ngIf="user_type === 'customer'">
+                <img src="assets/images/facebookicon.png" class="fb_icon" alt="">
+                LOGIN WITH FACEBOOK
+            </button>
+            <div class="text-right" *ngIf="user_type === 'butcher'">
+                <a [routerLink]="['/auth/butchersignup']" class="color-orange">
+                    <p><i class="fa fa-user-plus mr-2"></i>Not a member? Register here!</p>
+                </a>
+            </div>
+            <div class="text-right" *ngIf="user_type === 'customer'">
+                <a [routerLink]="['/auth/signup']" class="color-orange" *ngIf="!this.return_url">
+                    <p><i class="fa fa-user-plus mr-2"></i>Not a member? Register here!</p>
+                </a>
+                <a [routerLink]="['/auth/signup']" [queryParams]="{returnUrl: this.return_url}" class="color-orange" *ngIf="this.return_url">
+                    <p><i class="fa fa-user-plus mr-2"></i>Not a member? Register here!</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-labelledby="forgotModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-orange">
+                <h5 class="modal-title text-light" id="forgotModalLabel">Forgot Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="forgot_emil" class="color-gray">Email Address</label>
+                    <input type="text" class="mt-input" id="forgot_email" name="forgot_email" placeholder="Email Address" 
+                    [(ngModel)]="forgot_email" [ngClass]="validation.textInputValidate(forgot_email)">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn mt-btn btn-block" (click)="forgotPassword()">RESET PASSWORD</button>
+            </div>
+        </div>
+    </div>
+</div>

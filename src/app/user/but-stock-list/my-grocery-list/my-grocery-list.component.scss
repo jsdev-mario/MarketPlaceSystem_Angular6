@@ -1,0 +1,184 @@
+.list-content{
+    border: 1px solid lightgray;
+    height: 250px;
+    overflow-y: auto;
+    cursor: pointer;
+    position: relative;
+}
+
+#cat-list-wrap .list-content-wrap{
+    width: 50%;
+    flex: 1 0 150px;
+}
+
+#choice-list-wrap .list-content-wrap{
+    width: 25%;
+    flex: 1 0 150px;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li{
+    padding: 0 5px 0 10px;
+    line-height: 30px;
+    border-bottom: 1px solid lightgray;
+    position: relative;
+}
+
+ul .cell{
+    display: flex;
+}
+
+ul li:hover, ul li.active{
+    background-color: rgb(230, 230, 230);
+}
+
+ul li .cell div:first-child{
+    flex-grow: 1
+}
+
+ul li .cell div:nth-child(2){
+    flex-basis: 20px;
+}
+ul li .cell div:nth-child(2) svg{
+    width: 100%;
+}
+
+#cat-list-wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#choice-list-wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#cat-list-section .list-content table tr td{
+    border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+#cat-list-section .list-content table tr td:last-child{
+    border-right: none;
+    border-bottom: 1px solid lightgray;
+}
+
+.control_group{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    width: 35px;
+    height: 30px;
+}
+
+.control_group.delgroup{
+    position: absolute;
+    top: 0;
+    right: 50px;
+    width: 23px;
+    height: 30px;
+}
+
+.control_group.available{
+    position: absolute;
+    top: 0;
+    right: 32px;
+    width: 23px;
+    height: 30px;
+}
+
+.addgroup{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    width: 23px;
+    height: 30px;
+}
+
+
+#choice-list-wrap .control_group{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    width: 35px;
+    height: 30px;
+}
+
+.control_group svg{
+    display: inline-block;
+}
+
+.list-content{
+    ul {
+        li.active, li:hover {
+            div.control_group{
+                display: block;
+            }
+        }
+    }
+}
+
+.list-content ul li div.control_group{
+    display: none;
+}
+
+.list-content ul li .subcat_inputcontent{
+    width: 100%;
+    // padding-bottom: 16px;
+    display: none;
+}
+.list-content ul li.active .subcat_inputcontent{
+    display: block;
+    overflow: hidden;
+}
+
+ul li .input_item{
+    height: 32px;
+}
+
+ul li .input_item select{
+    height: 29px;
+    width: 100%;
+    border: 1px solid #a2a2a2;
+    background: white;
+    text-align: right;
+    // border-radius: 0 !important;
+    // -webkit-appearance: none;
+}
+
+ul li .input_item input{
+    height: 30px;
+    width: 100%;
+    border: 1px solid #a2a2a2;
+    background: white;
+    text-align: right;
+    padding: 0 16px;
+}
+
+.dsr_label{
+    flex-grow: 1;
+    flex-basis: 300px;
+    display: flex;
+    text-align: left;
+    align-items: center;
+}
+
+.dsr_input{
+    flex-grow: 4;
+    flex-shrink: 1;
+}
+
+.dsr_input input{
+    width: 100%;
+}
+
+.dsr_savebtn{
+    flex-grow: 1;
+    flex-basis: 150px;
+    max-width: 150px;
+}

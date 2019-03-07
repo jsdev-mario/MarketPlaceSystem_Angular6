@@ -1,0 +1,90 @@
+<header>
+    <div class="top_slogan_wrap">
+        <div class="top_slogan">CLICK<i class="fa fa-star"></i>ORDER<i class="fa fa-star"></i>RECEIVE</div>
+    </div>
+    <div id="header-bar">
+            <div class="home_icon_wrap">
+                <a [routerLink]="['/']"><img src="assets/images/homeicon.png" alt=""></a>
+            </div>
+            <div class="menu_section_wrap">
+                <div class="simple_menu">
+                    <div *ngIf="customerName() !== ''" class="user_name">
+                        {{customerName()}}
+                    </div>
+                    <div class="login_signtext" *ngIf="customerName() === ''">
+                        <span><a [routerLink]="['/auth/login', 'customer']" class="h6 text-right">Log in</a>&nbsp;|&nbsp;</span>
+                        <a [routerLink]="['/auth/signup']" class="h6" style="margin-left: -5px;">Sign up</a>
+                    </div>
+                    <div>
+                        <div class="basket point" *ngIf="this.order_service.current_order && order_service.getSubTotalPrice() > 0" style="width: 60px;"
+                            (click)="gotoMenu()">
+                            <img src="assets/images/basketicon.png" alt=""><br>
+                            <small class="font-3"><b>£ {{order_service.getSubTotalPrice() | number : '1.2-2'}}</b></small>
+                        </div>
+                        <div class="basket"  *ngIf="!this.order_service.current_order || order_service.getSubTotalPrice() == 0" style="width: 60px;">
+                            <img src="assets/images/basketicon.png" alt=""><br>
+                            <small class="font-3"><b>£ {{order_service.getSubTotalPrice() | number : '1.2-2'}}</b></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="main_menu">
+                    <div class="point" (click)="status_service.expend_menu = !status_service.expend_menu">
+                        <img src="assets/images/profile_placeholder.png" alt="">
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+                </div>
+                <ul class="user_menu_wrap text-left point" *ngIf="status_service.expend_menu">
+                    <li class="mobile_menu profile_name" *ngIf="user"><p>{{customerName()}}</p></li>
+                    <hr>
+                    <li *ngIf="user" (click)="selectCustMenu(0)"><a>Account Setting</a></li>
+                    <li *ngIf="user" (click)="selectCustMenu(1)"><a>Orders</a></li>
+                    <li (click)="selectCustMenu(2)"><a>Contact Us</a></li>
+                    <li class="mobile_menu" *ngIf="!user" (click)="selectCustMenu(3)"><a>Log In</a></li>
+                    <li class="mobile_menu" *ngIf="!user" (click)="selectCustMenu(4)"><a>Sign Up</a></li>
+                    <li *ngIf="user" (click)="selectCustMenu(5)"><a>Log Out</a></li>
+                </ul>
+            </div>
+        </div>
+    <div class="menu_mask" *ngIf="status_service.expend_menu" (click)="status_service.expend_menu = !status_service.expend_menu"></div>
+</header>
+<section id="home-main-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3 home_logo_content">
+                <div class=" home-logo-wrap" *ngIf="!site_info || !site_info.logo">
+                    <img src="assets/images/logo.png" alt="">
+                </div>
+                <div class=" home-logo-wrap" *ngIf="site_info && site_info.logo">
+                    <img [src]="site_info.logo" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class=" home_fresh_wrap text-center">
+                    <div class="slogan text-light">FRESH<i class="fa fa-star"></i>FAST<i class="fa fa-star"></i>CONVENIENT</div>
+                </div>
+            </div>
+        </div>
+        <div class=" row" id="home-search-section">
+            <div class="col-lg-8 col-sm-8 col-md-12 offset-md-0 offset-lg-2 offset-sm-2">
+                <div class=" row">
+                    <div class="col-md-6 mb-2">
+                        <input type="text" id="search_post_code" name="search_post_code" placeholder="POST CODE" [(ngModel)]="post_code">
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <img src="assets/images/search_icon.png" alt="">
+                        <button (click)="gotoSearch()">Search Butchers</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" row" id="butcher-sign-section">
+            <img src="assets/images/butcher_icon.png" alt=""> Butcher?&nbsp;&nbsp;
+            <a [routerLink]="['/auth/login', 'butcher']">Log in</a>&nbsp;|
+            <a [routerLink]="['/auth/butchersignup']">&nbsp;Sign up</a>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>
+

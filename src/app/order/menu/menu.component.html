@@ -1,0 +1,106 @@
+<div class="container menu_section" *ngIf="is_smalldevice && selected_butcher && selected_butcher.shop" (window:resize)="onResize($event)">
+    <div class="row">
+        <div class="col-md-2 pt-4" id="menu_category_section">
+            <div>
+                <app-menu-category></app-menu-category>
+            </div>
+        </div>
+        <div class="col-md-7" id="menu_list_section">
+            <app-menu-list></app-menu-list>
+        </div>
+        <div class="col-md-3 pt-4" id="menu_shopcart_section">
+            <div id="shopcard_content">
+                <app-menu-shopcart></app-menu-shopcart>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="main-content" class="main menu_section" *ngIf="!is_smalldevice && selected_butcher && selected_butcher.shop" (window:resize)="onResize($event)">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2" id="menu_category_section">
+                <div id="cat_sidebar" class="sidebar">
+                    <div class="sidebar__inner">
+                        <div class="mt-4">
+                            <app-menu-category></app-menu-category>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7" id="menu_list_section">
+                <div id="content" class="content">
+                    <div>                       
+                        <app-menu-list></app-menu-list>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" id="menu_shopcart_section">
+                <div id="menu_sidebar" class="sidebar">
+                    <div class="sidebar__inner">
+                        <div id="shopcard_content" class="mt-4" #shopcartcontent>
+                            <app-menu-shopcart></app-menu-shopcart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-primary btn-lg d-none" data-toggle="modal" data-target="#confrm_dlg" id="configdlg_btn"></button>
+<div class="modal fade" id="confrm_dlg" tabindex="-1" role="dialog" aria-labelledby="confrm_dlgTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-gray">
+                <h5 class="modal-title ml-5" id="confrm_dlgTitle">Please confirm your collection time</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group mb-3">
+                                <label for="delivery_day" class=" ">Collection Day</label>
+                                <div class="mt-success-select">
+                                    <div class="icon-wrap">
+                                        <i class="fa fa-angle-down text-light"></i>
+                                    </div>
+                                    <ng-select [items]="delivery_days" bindLabel="name" bindValue="id" placeholder=""
+                                        [(ngModel)]="delivery_dayno" name="delivery_day" (change)="deliveryDayChange($event)"></ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group mb-3">
+                                <label for="delivery_time" class=" ">Collection Time</label>
+                                <div class="mt-success-select">
+                                    <div class="icon-wrap">
+                                        <i class="fa fa-angle-down text-light"></i>
+                                    </div>
+                                    <ng-select [items]="delivery_times" bindLabel="name" bindValue="id" placeholder="" 
+                                    [(ngModel)]="delivery_timeno" name="delivery_time" (change)="deliveryDateChange($event)"></ng-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group mb-0">
+                                <label for="instruction" class="color-orange">Instructions for the butcher</label>
+                                <textarea class="form-control" name="instruction" id="instruction" rows="3" [(ngModel)]="order_service.current_order.note"></textarea>
+                                <p class="text-danger text-center font-2 mt-2 mb-0" *ngIf="!isToday()">
+                                    Warning! You are placing a pre-order for {{displayDeliveryDate()}}.
+                                    Would you like to continue or review the collection date?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn mt-btn w-50" data-dismiss="modal" (click)="confirmPay()">Confirm & Pay</button>
+            </div>
+        </div>
+    </div>
+</div>

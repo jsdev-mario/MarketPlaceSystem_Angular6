@@ -1,0 +1,41 @@
+/** common header bar ***/
+
+header{
+    width: 100%;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.stat a:hover{
+    color: gray;
+}
+
+
+.header-bottombar{
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.click-order-img{
+    margin: 17.5px 0 17.5px 0;
+    height: 25px;
+}
+
+.photo{
+    cursor: pointer;
+}
+
+.header_logo_content{
+    margin-top: 3.7rem;
+}
+
+.stat{
+    margin-left: 5rem;
+    font-size: 1.1rem;
+}

@@ -1,0 +1,116 @@
+@media screen and (max-width: 575px) {
+    .dash_section{
+        margin-top: -1.75rem !important;
+    }
+
+    .table_content table{
+        width: 1400px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .table_content table{
+        width: 1400px !important;
+    }
+}
+
+
+.price_summary, .ordercount_summary, .noti_summary,
+.cashpay_summary, .cardpay_summary, .paypalpay_summary{
+    height: 130px;
+    color: white;
+}
+
+.price_summary>div:last-child,
+.ordercount_summary>div:last-child,
+.noti_summary>div:last-child,
+.cashpay_summary>div:last-child,
+.cardpay_summary>div:last-child,
+.paypalpay_summary>div:last-child
+{
+    margin-top: 35px;
+}
+
+.dash_summary_content img{
+    width: 60px;
+    border-radius: 100%;
+}
+
+.table_content{
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table_content table{
+    min-width: 575px;
+}
+
+/**** ng select cusomize ****/
+:host /deep/ ng-select .ng-control{
+    background-color: transparent !important;
+    height: 38px !important;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select .ng-value{
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select{
+    width: calc(100% + 4px) !important;
+    margin-left: -2px !important;
+}
+
+
+:host /deep/ ng-select .ng-input{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.marked{
+    background-color: #fcb35f !important;
+}
+
+:host /deep/ ng-select .ng-option{
+    background-color: #F6931D !important;
+    color: white !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel{
+    background-color: #F6931D !important;
+    border: none !important;
+    /* margin-left: -2px!important; */
+    /* margin-right: -4px!important; */
+    
+}
+
+:host /deep/ ng-select .ng-arrow{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-clear{
+    display: none !important;
+}
+
+
+
+:host /deep/ pagination .page-link{
+    color: #F6931D;
+}
+
+:host /deep/ pagination .page-item.active .page-link{
+    background-color: #F6931D;
+    border-color: #F6931D;
+}
+
+:host /deep/ pagination .page-item.disabled .page-link{
+    color: #F6931D;
+}
+
+.form-control{
+    color: #F6931D !important;
+}
+

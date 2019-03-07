@@ -1,0 +1,168 @@
+<div class="shop_intro_wrap text-center">
+    <div class="header-butcher-logo-wrap">
+        <div class="header-butcher-deflogo" *ngIf="!selected_butcher || !selected_butcher.shop.shop_logo">
+            <p>{{displayAbbreName()}}</p>
+        </div>
+        <img [src]="selected_butcher.shop.shop_logo" alt=""  *ngIf="selected_butcher && selected_butcher.shop.shop_logo">
+    </div>
+    <p>{{selected_butcher.shop.shop_name}}</p>
+    <p class="font-2">{{displayMeatType()}}</p>
+    <p class="font-2">{{displayOpenTime()}}</p>
+    <star-rating [starType]="'svg'" [rating]="selected_butcher.shop.rate" [readOnly]="true"></star-rating>
+</div>
+<div class="tab_wrap">
+    <div class="tab point" [ngClass]="{'sel_tab': menu_service.selected_content_section === 0}" (click)="selectGrocery();">Groceries</div>
+    <div class="tab point" [ngClass]="{'sel_tab': menu_service.selected_content_section === 1}" (click)="selectAboutUs()">About us</div>
+</div>
+<div id="menu-lists" *ngIf="menu_service.menu && menu_service.selected_category && menu_service.selected_content_section === 0">
+    <h5 class="color-orange my-2 ml-2">{{menu_service.selected_category.name}}</h5>
+    <div class="menu-list" *ngFor="let subcategory of menu_service.selected_subcategories">
+        <div class="d-flex" >
+            <div class="mr-auto menu_details">
+                <div class="subcategory_name">{{subcategory.subcategory.name}} - <span [ngClass]="{'text-danger': !subcategory.is_available}">{{additioanlInfoMenu(subcategory)}}</span></div>
+                <div class="description color-gray font-2">
+                    {{subcategory.description}}
+                </div>
+                <div class="text-danger"><small><b>{{offer(subcategory)}}</b></small></div>
+            </div>
+            <div class="price_wrap">
+                <div class="color-dark-gray font-2 mr-auto price">
+                    <p *ngIf="!subcategory.offer || subcategory.offer.qty > 1">£ {{subcategory.price | number: '1.2-2'}}</p>
+                    <p *ngIf="subcategory.offer && subcategory.offer.qty === 1">£ {{subcategory.offer.price | number: '1.2-2'}}</p>
+                    <p *ngIf="subcategory.offer && subcategory.offer.qty === 1"><del>&nbsp;£ {{subcategory.price | number: '1.2-2'}}</del></p>
+                </div>
+                <div class="add-btn point" (click)="addMenu(subcategory)" *ngIf="subcategory.is_available"><i class="fa fa-plus-circle color-orange "></i></div>
+                <div class="add-btn" *ngIf="!subcategory.is_available"><i class="fa fa-plus-circle color-light-gray "></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="about_us_section" *ngIf="menu_service.selected_content_section === 1">
+    <h5 class="mt-4 mb-2">Why buy from us?</h5>
+    <div class="why_busy_content">
+        <p class="font-2">{{selected_butcher.shop.shop_introduction}}</p>
+    </div>
+    <h5 class="mt-4 mb-2">Where to find us?</h5>
+    <div class="shop_map_wrap" id="JNJ127">
+        <div id="findusMap" style="width:100%; height:300px;"></div>
+        <p class="mt-4">Our Address</p>
+        <p class="color-orange">{{displayAddress()}}</p>
+        <p class="mt-4">Red are on the map</p>
+        <p class="color-orange">We deliver within a {{selected_butcher.shop.delivery_radius}} mile</p>
+    </div>
+    <h5 class="mt-4 mb-2">Our Opening Hours & Delivery Times?</h5>
+    <div class="shop_opentime_wrap">
+        <div class="row" *ngFor="let day of days; let i = index;">
+            <div class="col"><p>{{day}}</p></div>
+            <div class="col color-orange"><p>{{open_times_str[i]}}</p></div>
+            <div class="col text-right" [ngClass]="{'text-danger': delavailable_str[i] === 'Collection Only'}"><p>{{delavailable_str[i]}}</p></div>
+            <div class="col color-orange"><p>{{delivery_times_str[i]}}</p></div>
+        </div>
+    </div>
+</div>
+<div class="choice_dlg" *ngIf="choice_display">
+    <div class="dlg_content">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="subcategory_name mb-4">{{selected_orderitem.product.subcategory.name}} - <span>{{additioanlInfoMenu(selected_orderitem.product)}}</span></div>
+                <p class="color-orange text-center" *ngIf="menu_service.getChoices(selected_orderitem.product).length > 0">Please select an option from each of the order choices below</p>
+            </div>
+        </div>
+        <div class="mt-select mb-3" *ngIf="choice1_items.length > 1">
+            <div class="icon-wrap">
+                <i class="fa fa-angle-down text-light"></i>
+            </div>
+            <ng-select [items]="choice1_items" bindLabel="name" bindValue="id" placeholder="Select order choice1" [(ngModel)]="selected_choice1_no" (change)="selectChoice1()">
+                <ng-template ng-label-tmp let-item="item">
+                    <div class="d-flex">
+                        <div class="mr-auto">{{item.name}}</div>
+                        <div>£ {{item.price | number: '1.2-2'}}</div>
+                    </div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                    <div class="d-flex">
+                        <div class="mr-auto">{{item.name}}</div>
+                        <div>£ {{item.price | number: '1.2-2'}}</div>
+                    </div>
+                </ng-template>
+            </ng-select>            
+        </div>
+        <div class="mt-select mb-3" *ngIf="choice2_items.length > 1">
+            <div class="icon-wrap">
+                <i class="fa fa-angle-down text-light"></i>
+            </div>
+            <ng-select [items]="choice2_items" bindLabel="name" bindValue="id" placeholder="Select order choice2" [(ngModel)]="selected_choice2_no" (change)="selectChoice2()">
+                <ng-template ng-label-tmp let-item="item">
+                    <div class="d-flex">
+                        <div class="mr-auto">{{item.name}}</div>
+                        <div>£ {{item.price | number: '1.2-2'}}</div>
+                    </div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                    <div class="d-flex">
+                        <div class="mr-auto">{{item.name}}</div>
+                        <div>£ {{item.price | number: '1.2-2'}}</div>
+                    </div>
+                </ng-template>
+            </ng-select>
+        </div>
+        <div class="mt-select mb-3" *ngIf="choice3_items.length > 1">
+            <div class="icon-wrap">
+                <i class="fa fa-angle-down text-light"></i>
+            </div>
+            <ng-select [items]="choice3_items" bindLabel="name" bindValue="id" placeholder="Select order choice3" [(ngModel)]="selected_choice3_no" (change)="selectChoice3()">
+                <ng-template ng-label-tmp let-item="item">
+                    <div class="d-flex">
+                        <div class="mr-auto">{{item.name}}</div>
+                        <div>£ {{item.price | number: '1.2-2'}}</div>
+                    </div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                    <div class="d-flex">
+                        <div class="mr-auto">{{item.name}}</div>
+                        <div>£ {{item.price | number: '1.2-2'}}</div>
+                    </div>
+                </ng-template>
+            </ng-select>
+        </div>
+        <div class="mt-select mb-3" *ngIf="choice4_items.length > 1">
+            <div class="icon-wrap">
+                <i class="fa fa-angle-down text-light"></i>
+            </div>
+            <ng-select [items]="choice4_items" bindLabel="name" bindValue="id" placeholder="Select order choice4" [(ngModel)]="selected_choice4_no" (change)="selectChoice4()">
+                <ng-template ng-label-tmp let-item="item">
+                    <div class="d-flex">
+                        <div class="mr-auto">{{item.name}}</div>
+                        <div>£ {{item.price | number: '1.2-2'}}</div>
+                    </div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                    <div class="d-flex">
+                        <div class="mr-auto">{{item.name}}</div>
+                        <div>£ {{item.price | number: '1.2-2'}}</div>
+                    </div>
+                </ng-template>
+            </ng-select>
+        </div>
+        <div class="d-flex mb-3">
+            <div class="mr-auto text-left">Total:</div>
+            <div class="text-right">£ {{selected_orderitem.sub_price | number:'1.2-2'}}</div>
+        </div>
+        <div class="row">
+            <div class="col-3 text-right pt-2" style="font-size: 1.3rem" (click)="countDecrease()"><i class="fa fa-minus-circle text-danger point"></i></div>
+            <div class="col-6">
+                <input type="text" class=" text-center text-color choice-count mb-4" [textMask]="{mask: number_mask, guide: false}" 
+                [ngModel]="selected_orderitem.count" (focusout)="inputCount($event)">
+            </div>
+            <div class="col-3 text-left pt-2" style="font-size: 1.3rem" (click)="countIncrease()"><i class="fa fa-plus-circle color-orange point"></i></div>
+        </div>
+        <div class="choice-btn-group">
+            <button type="button" class="btn mt-disable-btn choice-btn mr-2" (click)="choiceOk()" *ngIf="!canAdd()" disabled>ADD</button>
+            <button type="button" class="btn mt-btn choice-btn mr-2" (click)="choiceOk()" *ngIf="canAdd()">ADD</button>
+            <button type="button" class="btn mt-btn choice-btn ml-2" (click)="choiceCancel()">CANCEL</button>
+        </div>
+    </div>
+</div>
+
+
+

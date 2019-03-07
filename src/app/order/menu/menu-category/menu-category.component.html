@@ -1,0 +1,9 @@
+<div class="cat-list" *ngIf="menu_service.menu && menu_service.isExistMenu()">
+  <h5 class="text-center mb-5">Grocery List</h5>
+  <ul>
+        <li class=" point" *ngFor="let category of menu_service.menu.categories" (click)="selectCategory(category)"
+             [ngClass]="{'selected_subcat': category._id === menu_service.selected_category._id}">
+            {{category.name}}
+        </li>
+  </ul>
+</div>

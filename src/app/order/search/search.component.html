@@ -1,0 +1,66 @@
+<div class=" container">
+    <div class=" row">
+        <div class="col-md mt-3">
+            <div class="search-fild">
+                <div class="value-wrap">
+                    <input type="text" id="post-code" name="post-code" placeholder="POST CODE" [(ngModel)]="post_code" (focusout)="postCodeChange()">
+                </div>
+                <div class="icon-wrap">
+                    <img src="assets/images/searchmapicon.png" alt="" class="meat-type-icon">
+                </div>
+            </div>
+        </div>
+        <div class="col-md mt-3">
+            <div class="search-fild">
+                <div class="value-wrap">
+                    <input type="text" id="meat-shop" name="meat-shop" placeholder="SHOP NAME" [(ngModel)]="shop_name" (ngModelChange)="shopNameChange()">
+                </div>
+                <div class="icon-wrap">
+                    <img src="assets/images/searchicon.png" alt="" class="meat-type-icon">
+                </div>
+            </div>
+        </div>
+        <div class="col-md mt-3">
+            <div class="search-select">
+                <div class="icon-wrap">
+                    <img src="assets/images/sorticon.png" alt="" class="meat-type-icon">
+                </div>
+                <ng-select [items]="sort_items" bindLabel="name" bindValue="id"  placeholder="A-Z" [(ngModel)]="sort_item" (change)="sortChange()"></ng-select>
+            </div>
+        </div>
+        <div class="col-md my-3">
+            <div class="search-select">
+                <div class="icon-wrap">
+                    <img src="assets/images/meat-type.png" alt="" class="meat-type-icon">
+                </div>
+                <ng-select [items]="meat_types" bindLabel="name" bindValue="id" placeholder="All(193)" [(ngModel)]="meat_type" 
+                (change)="meatTypeChange($event)"></ng-select>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="search-result" *ngIf="butchers && butchers.length > 0">
+        <div class="col-12 my-3 text-center">
+            <h5>Butchers currently serving in {{search_service.post_code | uppercase}}</h5>
+        </div>
+        <div class="col-md-6 mb-3 col-lg-4" *ngFor="let butcher of butchers">
+            <app-butcher [butcher]="butcher"></app-butcher>
+        </div>
+    </div>
+    <div class="row mt-5" id="search-result" *ngIf="butchers && butchers.length == 0">
+        <div class="col-md-6 offset-md-3 text-center">
+            <p style="margin: 0">Oops! Looks like there are no butchers serving in your are at the moment.</p>
+            <p>We are working on it!</p>
+            <p class="color-orange">Search for another postcode</p>
+        </div>
+    </div>
+    <div style="position: relative;" class="mt-5" *ngIf="butchers === undefined">
+        <div class="spinner_black">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+</div>
+
+        
+   

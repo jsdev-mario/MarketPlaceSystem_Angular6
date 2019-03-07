@@ -1,0 +1,203 @@
+<div class="container-fluid dash_section">
+    <h2 class="mb-5">Orders History</h2>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                              <label for="search_order_id">Order Number</label>
+                              <input type="text" class="mt-input" name="search_order_id" id="search_order_id" placeholder="Order Number" [(ngModel)]="search_order_id" 
+                              [ngClass]="validation.textInputOptionalValidate(search_order_id)" (change)="onInputOrderID($event)">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="search_cust_name">Customer's Name</label>
+                                <input type="text" class="mt-input" name="search_cust_name" id="search_cust_name" placeholder="Customer's Name" [(ngModel)]="search_cust_name"
+                                [ngClass]="validation.textInputOptionalValidate(search_cust_name)" [disabled]="search_order_id">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="search_cust_postcode">Customer's postcode</label>
+                                <input type="text" class="mt-input" name="search_cust_postcode" id="search_cust_postcode" placeholder="Customer's postcode"
+                                 [(ngModel)]="search_cust_postcode" [ngClass]="validation.textInputOptionalValidate(search_cust_postcode)" [disabled]="search_order_id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="order_status">Status</label>
+                                <div class="mt-select">
+                                    <div class="icon-wrap">
+                                        <i class="fa fa-angle-down text-light"></i>
+                                    </div>
+                                    <ng-select [items]="ordst_select_datas" bindLabel="name" bindValue="id" placeholder="Select order status" 
+                                    [(ngModel)]="search_status" name="search_status" [disabled]="search_order_id" ></ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="search_from_date">From Date</label>
+                                <input type="text" id="search_from_date" class="mt-input" #dpFull="bsDatepicker" bsDatepicker 
+                                    (bsValueChange)="onChangeSearchFromDate($event)" [bsValue]="search_from_date" [bsConfig]="{ dateInputFormat: 'DD MMM YYYY'}" 
+                                    [ngClass]="validation.textInputOptionalValidate(search_from_date)" [disabled]="search_order_id">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="search_to_date">To Date</label>
+                                <input type="text" id="search_to_date" class="mt-input" #dpFull="bsDatepicker" bsDatepicker 
+                                    (bsValueChange)="onChangeSearchToDate($event)" [bsValue]="search_to_date" [bsConfig]="{ dateInputFormat: 'DD MMM YYYY'}"
+                                    [ngClass]="validation.textInputOptionalValidate(search_to_date)" [disabled]="search_order_id">
+                            </div>
+                        </div>
+                        <div class="col-md d-flex align-items-end pb-3">
+                            <button class="btn mt-btn btn-block" (click)="search()">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-md-3 mb-1">
+                <div class="col-12 d-flex justify-content-end px-0">
+                    <div class="btn btn-light bg-gray font-2 mr-2" (click)="downloadCSV()"><i class="fa fa-download mr-1"></i>Download CSV</div>
+                    <div class="btn btn-light bg-gray font-2" (click)="downloadPDF()"><i class="fa fa-download mr-1"></i>Download PDF</div>
+                </div>
+            </div>
+            <div class="row dash_summary_content mb-md-3 mb-1">
+                <div class="col-md mb-md-0 mb-1">
+                    <div class="row price_summary mr-md-1 bg-purple">
+                        <div class="col-4 d-flex align-items-center justify-content-center">
+                            <img src="assets/images/pound.png" alt="">
+                        </div>
+                        <div class="col-8">
+                            <h3>£ {{total_price | number : '1.2-2'}}</h3>
+                            <h6>Today's Sales</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md mb-md-0 mb-1">
+                    <div class="row ordercount_summary bg-orange">
+                        <div class="col-4 d-flex align-items-center justify-content-center">
+                            <img src="assets/images/orders.png" alt="">
+                        </div>
+                        <div class="col-8">
+                            <h3>{{total_count}}</h3>
+                            <h6>Total Orders</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="row noti_summary ml-md-1 bg-danger">
+                        <div class="col-4 d-flex align-items-center justify-content-center">
+                            <img src="assets/images/bell.png" alt="">
+                        </div>
+                        <div class="col-8">
+                            <h3>{{await_confirm_count}}</h3>
+                            <h6>Awaiting Confirmation</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row dash_summary_content">
+                <div class="col-md mb-md-0 mb-1">
+                    <div class="row cashpay_summary mr-md-1 bg-pink">
+                        <div class="col-4 d-flex align-items-center justify-content-center">
+                            <img src="assets/images/dash_cashpayicon.png" alt="">
+                        </div>
+                        <div class="col-8">
+                            <h3>£ {{cashpay_price | number : '1.2-2'}}</h3>
+                            <h6>Cash Payments</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md mb-md-0 mb-1">
+                    <div class="row cardpay_summary bg-sky">
+                        <div class="col-4 d-flex align-items-center justify-content-center">
+                            <img src="assets/images/dash_cardpayicon.png" alt="">
+                        </div>
+                        <div class="col-8">
+                            <h3>{{cardpay_price | number : '1.2-2'}}</h3>
+                            <h6>Card Payments</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="row paypalpay_summary ml-md-1 bg-darkpurple">
+                        <div class="col-4 d-flex align-items-center justify-content-center">
+                            <img src="assets/images/dash_paypalpayicon.png" alt="">
+                        </div>
+                        <div class="col-8">
+                            <h3>{{paypalpay_price | number : '1.2-2'}}</h3>
+                            <h6>PayPal Payments</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 px-0 py-4">
+                    <div class="table_content">
+                        <table class="table table-hover font-3 text-center" style="background-color: #f7f7f7">
+                            <thead class="thead-default bg-gray">
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Date</th>
+                                    <th>Order Time</th>
+                                    <th>Name</th>
+                                    <th>Payment Type</th>
+                                    <th>Order Type</th>
+                                    <th>£ Sub<br>Total</th>
+                                    <th>£ Delivery<br>Charges</th>
+                                    <th>£ Refund</th>
+                                    <th>£ Total</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let order of page_orders">
+                                    <td scope="row">{{order.order_id}}</td>
+                                    <td>{{getOrderDate(order)}}</td>
+                                    <td>{{getOrderTime(order)}}</td>
+                                    <td>{{getOrderCustName(order)}}</td>
+                                    <td>{{getOrderPaymentMethod(order)}}</td>
+                                    <td class="p-0 text-left">
+                                        <div>{{getOrderDeliveryOption(order)}}</div>
+                                        <div class="text-danger">{{getDeliveryDateTime(order)}}</div>
+                                    </td>
+                                    <td [ngClass]="getSubPriceColor(order)">{{order.sub_price | number : '1.2-2'}}</td>
+                                    <td [ngClass]="getDeliveryChargeColor(order)">{{getOrderDeliveryFee(order)}}</td>
+                                    <td [ngClass]="getRefundColor(order)">{{order.refund_price | number: '1.2-2'}}</td>
+                                    <td>{{order.sub_price + order.delivery_fee + order.refund_price | number: '1.2-2'}}</td>
+                                    <td class="d-flex">
+                                        <i [ngClass]="getOrderStatusIcon(order)"></i>
+                                        <div class="text-left">{{getOrderStatus(order)}}</div>
+                                    </td>
+                                    <td class="m-0 point" [ngClass]="getControlColor(order)" (click)="gotoOrderView(order)">View Order</td>
+                                </tr>						
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex">
+                        <div class="mr-auto" style="width: 100px;">
+                            <div class="form-group">
+                                <select class="form-control" name="countperpage" id="countperpage" [(ngModel)]="countperpage" (change)="countPerPageChange($event)">
+                                    <option *ngFor="let item of countperpages" [ngValue]="item">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <pagination [boundaryLinks]="true" [totalItems]="filtered_orders.length" [itemsPerPage]="countperpage" [maxSize]="5" [(ngModel)]="current_page" (pageChanged)="pageChanged($event)"
+                            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    

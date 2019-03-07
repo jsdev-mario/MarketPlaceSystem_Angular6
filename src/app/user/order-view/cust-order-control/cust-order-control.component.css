@@ -1,0 +1,41 @@
+.order_status_block {
+  height: 100px;
+  width: 100%;
+}
+
+.order_status_block img {
+  height: 50px;
+  padding-left: 15px;
+}
+
+/**** star-rating cusomize ****/
+
+:host /deep/ star-rating div {
+  outline: none;
+}
+
+:host /deep/ star-rating .rating.color-positive .star-container .star svg {
+  fill: #F6931D !important;
+}
+
+:host /deep/ star-rating .rating.color-default .star-container .star svg {
+  fill: #F6931D !important;
+}
+
+:host /deep/ star-rating .rating.color-negative .star-container .star svg{
+    fill: #F6931D!important;
+}
+
+:host /deep/ star-rating .rating.color-ok .star-container .star svg{
+    fill: #F6931D!important;
+}
+
+:host /deep/ star-rating .rating{
+    justify-content: left !important;
+}
+
+:host /deep/ star-rating .rating.medium .star, .star.medium{
+    width: 25px !important;
+    height: 25px !important
+}
+

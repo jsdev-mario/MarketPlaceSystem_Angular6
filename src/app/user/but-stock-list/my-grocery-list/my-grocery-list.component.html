@@ -1,0 +1,210 @@
+<h4>My Grocery List</h4>
+<div class="row mb-2 font-2" id="cat-list-section">
+    <div class="col-xl-5" id="cat-list-wrap">
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Main item list</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let category of stlist_service.categories; let i = index" (click)="categorySelected(category)" [ngClass]="{'active': category === stlist_service.selected_category}">
+                        <div class="cell">
+                            <div>{{category.name}}</div>
+                            <div>
+                                <i class="fa fa-angle-right text-right color-orange"></i>
+                            </div>
+                        </div>
+                        <div class="control_group">
+                            <a (click)="deleteCategory(i, $event)">
+                                <i class="fa fa-trash mx-2 text-danger"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Sub category</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let subcategory of stlist_service.selected_subcategories let i = index" [ngClass]="{'active': subcategory === stlist_service.selected_subcategory}">
+                        <div class="cell" (click)="subcategorySelected(subcategory)">
+                            <div [ngClass]="{'text-danger': !subcategory.is_available}">{{subcategory.name}}</div>
+                            <div>
+                                <i class="fa fa-angle-right text-right color-orange"></i>
+                            </div>
+                        </div>
+                        <div class="addgroup">
+                            <a (click)="addOfferSubCat(i, $event)" *ngIf="!subcategory.offer">
+                                <i class="fa fa-plus-circle mr-2"></i>
+                            </a>
+                        </div>
+                        <div class="control_group delgroup">
+                            <a (click)="deleteSubCat(i, $event)">
+                                <i class="fa fa-trash mr-2 text-danger"></i>
+                            </a>
+                        </div>
+                        <div class="control_group available">
+                            <input type="checkbox" [(ngModel)]="subcategory.is_available">
+                        </div>
+                        <div class="subcat_inputcontent">
+                            <div class="row input_item">
+                                <div class="col-4">
+                                    <small>Unit</small>
+                                </div>
+                                <div class="col-8">
+                                    <select name="unit" id="unit" [(ngModel)]="subcategory.unit" [disabled]="subcategory.offer" (change)="unitChange($event)">
+                                        <option [ngValue]=0>Each</option>
+                                        <option [ngValue]=2>g(Grams)</option>
+                                        <option [ngValue]=1>Kg</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row input_item">
+                                <div class="col-4">
+                                    <small>Qty</small>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" [(ngModel)]="subcategory.qty" value="1" disabled *ngIf="subcategory.unit === 0">
+                                    <input type="text" [(ngModel)]="subcategory.qty" [textMask]="{mask: number_mask, guide: false}"
+                                     *ngIf="subcategory.unit === 1" (change)="subcategory.qty = qtyChange($event)" 
+                                     [readonly]="subcategory.offer" (click)="subCatQtyFocus($event)">
+                                    <input type="text" [(ngModel)]="subcategory.qty" [textMask]="{mask: gram_mask, guide: false}"
+                                     *ngIf="subcategory.unit === 2"(change)="subcategory.qty = qtyChange($event)" 
+                                     [readonly]="subcategory.offer" (click)="subCatQtyFocus($event)">
+                                </div>
+                            </div>
+                            <div class="row input_item">
+                                <div class="col-4">
+                                    <small>Price (£)</small>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" [textMask]="{mask: price_mask, guide: false}"  
+                                    [ngModel]="subcategory.price | number: '1.2-2'" (focusout)="subcategory.price = numberFormat($event)" (focus)="subCatPriceFocus($event)"
+                                    [readonly]="subcategory.offer">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-7" id="choice-list-wrap">
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Order choice1</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let choice of stlist_service.selected_choices1 let i = index" [ngClass]="{'active': choice === stlist_service.selected_choice1}">
+                        <div class="cell" (click)="choiceSelected(choice)">
+                            <div>{{choice.name}}</div>
+                        </div>
+                        <div class="control_group">
+                            <a (click)="deleteChoice(choice, i)">
+                                <i class="fa fa-trash mx-2 text-danger"></i>
+                            </a>
+                        </div>
+                        <div class="subcat_inputcontent">
+                            <div class="row input_item">
+                                <div class="col-4">
+                                    <small>Price</small>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" [textMask]="{mask: price_mask, guide: false}" [ngModel]="choice.price | number: '1.2-2'" (focusout)="choice.price = numberFormat($event)">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Order choice2</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let choice of stlist_service.selected_choices2 let i = index" [ngClass]="{'active': choice === stlist_service.selected_choice2}">
+                        <div class="cell" (click)="choiceSelected(choice)">
+                            <div>{{choice.name}}</div>
+                        </div>
+                        <div class="control_group">
+                            <a (click)="deleteChoice(choice, i)">
+                                <i class="fa fa-trash mx-2 text-danger"></i>
+                            </a>
+                        </div>
+                        <div class="subcat_inputcontent">
+                            <div class="row input_item">
+                                <div class="col-4">
+                                    <small>Price</small>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" [textMask]="{mask: price_mask, guide: false}" [ngModel]="choice.price | number: '1.2-2'" (focusout)="choice.price = numberFormat($event)">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Order choice3</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let choice of stlist_service.selected_choices3 let i = index" [ngClass]="{'active': choice === stlist_service.selected_choice3}">
+                        <div class="cell" (click)="choiceSelected(choice)">
+                            <div>{{choice.name}}</div>
+                        </div>
+                        <div class="control_group">
+                            <a (click)="deleteChoice(choice, i)">
+                                <i class="fa fa-trash mx-2 text-danger"></i>
+                            </a>
+                        </div>
+                        <div class="subcat_inputcontent">
+                            <div class="row input_item">
+                                <div class="col-4">
+                                    <small>Price</small>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" [textMask]="{mask: price_mask, guide: false}" [ngModel]="choice.price | number: '1.2-2'" (focusout)="choice.price = numberFormat($event)">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Order choice4</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let choice of stlist_service.selected_choices4 let i = index" [ngClass]="{'active': choice === stlist_service.selected_choice4}">
+                        <div class="cell" (click)="choiceSelected(choice)">
+                            <div>{{choice.name}}</div>
+                        </div>
+                        <div class="control_group">
+                            <a (click)="deleteChoice(choice, i)">
+                                <i class="fa fa-trash mx-2 text-danger"></i>
+                            </a>
+                        </div>
+                        <div class="subcat_inputcontent">
+                            <div class="row input_item">
+                                <div class="col-4">
+                                    <small>Price</small>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" [textMask]="{mask: price_mask, guide: false}" [ngModel]="choice.price | number: '1.2-2'" (focusout)="choice.price = numberFormat($event)">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-4" *ngIf="stlist_service.selected_subcategory">
+    <div class="col-sm-4 text-right mt-2">
+        Description of {{stlist_service.selected_subcategory.name}}
+    </div>
+    <div class="col-sm-8 mb-2">
+        <input type="text" name="" id="" class="mt-input" style="color:#F6931D" [(ngModel)]="stlist_service.selected_subcategory.description">
+    </div>
+</div>
+

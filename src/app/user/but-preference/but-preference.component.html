@@ -1,0 +1,305 @@
+<div class="container">
+    <h2 class="text-center ">Personal profile</h2>
+    <div class="row">
+        <div class="col-xl-6 setting_section">
+            <div class="row meattypes_section mb-4">
+                <div class="col-md-5">
+                    <label for="">Our provided meat types</label>
+                    <div class=" provide_meattype_content">
+                        <ul *ngIf="site_info">
+                            <li *ngFor="let meat_type of provided_meattypes" 
+                            [ngClass]="{'selected_cell': selected_provided_meattype === meat_type}" (click)="selectProvidedMeatType(meat_type)">{{meat_type}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex flex-column justify-content-center align-content-around">
+                    <button type="button" name="" id="" class="btn mt-btn my-2" (click)="addMeatType()" [ngClass]="{'mt-disable-btn': !selected_provided_meattype}">>></button>
+                    <button type="button" name="" id="" class="btn mt-btn my-2" (click)="removeMeatType()" [ngClass]="{'mt-disable-btn': !selected_shop_meattype}"><<</button>
+                </div>
+                <div class="col-md-5">
+                    <label for="">Your shop meat types<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                    <div class="selected_meattype_content">
+                        <ul *ngIf="user.shop">
+                            <li *ngFor="let meat_type of shop_meattypes" 
+                            [ngClass]="{'selected_cell': selected_shop_meattype === meat_type}" (click)="selectShopMeatType(meat_type)">{{meat_type}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row profilephoto_section mb-2">
+                <div class="col-md-5">
+                    <input type="file" class="form-control-file" name="profilephoto_file" id="profilephoto_file" hidden (change)="uploadProfilePhoto($event)">
+                    <button id="" name="" class="btn mt-btn btn-block" onClick="$('#profilephoto_file').click();">Upload profile picture</button>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    <button id="" name="" class="btn mt-btn btn-block" (click)="removeProfilePhoto()" [ngClass]="{'mt-disable-btn': !shop_photo}">Remove profile picture</button>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="font-2 picexplain_wrap">Click here to view our guidelines for updating a profile picture
+                        <div class="picexplain_content">
+                            <h6>Guidelines for uploading a business profile picture</h6>
+                            <img src="assets/images/shopphoto_guidline.png" alt="">
+                            <p class="font-4" style="margin: 0">
+                                A profile picture should be your business logo or an image of your meat shop.We only support JPEG, GIF, TIFF and PNG file formats. 
+                                The maximum file size for an image is 2MB and the recommended dimensionsare 400x400 pixels.
+                                If you do not wish to upload an image, a default profile picture will be generated. 
+                                This will be shown as the first two initials of your business name. Profile pictures that violate the terms and conditions will be removed.<br>
+                                <small class="color-orange font-4">If you have any problems updating your profile pictures, Please <a class="point" (click)="gotoContactUs()">contact us</a></small>
+                            </p>
+                        </div>
+                    </div>
+                    <small class="color-orange font-2">If you have any problems updating your profile pictures, Please <a class="point" (click)="gotoContactUs()">contact us</a></small>
+                </div>
+            </div>
+            <div class="row emailphone_section">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Email address<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                        <input type="email" class="mt-input" name="email" id="email" [(ngModel)]="email" 
+                            [ngClass]="validation.textInputValidate(email)">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Mobile number<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                        <input type="text" class="mt-input" name="mobile_phone" id="mobile_phone" [(ngModel)]="mobile_phone" 
+                            [ngClass]="validation.textInputValidate(mobile_phone)" [textMask]="{mask: phone_mask, guide: false}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for=""><small class="font-1">Shop phone number</small><strong class="color-orange">&nbsp;&nbsp;*</strong><br>
+                        <small class="text-muted">(For customer’s order inquiry)</small></label>
+                        <input type="text" class="mt-input" name="shop_phone" id="shop_phone" [(ngModel)]="shop_phone" 
+                            [ngClass]="validation.textInputValidate(shop_phone)" [textMask]="{mask: phone_mask, guide: false}">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-12">
+                    <small class="color-orange font-2">If you need to change any other information, Please <a  class="point" (click)="gotoContactUs()">contact us</a></small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <div for="" class="font-2 intro_wrap">Introduction to your business (Max 250 words) 
+                            <a><i class="fa fa-info-circle color-orange"></i></a>
+                            <div class="introexplain_content">
+                                <p class="font-3">
+                                    Here you can write description of your business. 
+                                    This can include information such as when your business was formed, your meat standards, shop hygiene rating, 
+                                    where you are located etc.Please do not exceed 250 words.
+                                </p>
+                            </div>
+                        </div>
+                        <textarea name="introduction" id="introduction" cols="30" rows="4" class="mt-textarea" [(ngModel)]="shop_introduction"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 result_section d-flex flex-xl-column flex-lg-row flex-md-column flex-sm-column flex-column">
+            <div class="shopset_result_content">
+                <h4>{{shop_name}}</h4>
+                <small class="color-orange font-2">{{displayMeatType()}}</small>
+                <div class="shop_logo"  *ngIf="!shop_photo">
+                    <p>{{displayAbbreName()}}</p>
+                </div>
+                <img [src]="shop_photo" alt="" *ngIf="shop_photo">
+                <p>{{displayAddress()}}</p>
+                <p class="color-orange">{{displayTodayShopTime()}}</p>
+                <p>Delivery available on orders of £ {{displayDeliveryPrice(min_delivery_price)}} and over<br>Delivery: {{displayDeliveryFee()}}</p>
+                <p class="color-orange">Approx. Collection: {{es_collection_time}} minutes</p>
+                <p class="color-orange">Approx. Delivery: {{es_delivery_time}} minutes</p>
+            </div>
+            <div class="shopset_result_content">
+                <div class="row mb-3"><div class="col-5">Account Number</div><div class="col-7 color-orange">Not assigned yet!</div></div>
+                <div class="row mb-3"><div class="col-5">Shop Name</div><div class="col-7 color-orange">{{user.shop.shop_name}}</div></div>
+                <div class="row mb-3"><div class="col-5">Owner Name</div><div class="col-7 color-orange">{{ownerNameDisplay()}}</div></div>
+                <div class="row mb-3"><div class="col-5">Email Address</div><div class="col-7 color-orange">{{email}}</div></div>
+                <div class="row mb-3"><div class="col-5">Mobile Number</div><div class="col-7 color-orange">{{mobile_phone}}</div></div>
+                <div class="row mb-3"><div class="col-5">Shop Phone Number </div><div class="col-7 color-orange">{{shop_phone}}</div></div>
+                <div class="row"><div class="col-5">Address </div><div class="col-7 color-orange">{{displayAddress()}}</div></div>
+            </div>
+        </div>
+    </div>
+    <h2 style="margin-top: 5rem">Delivery and radius preferences</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row mb-4">
+                <div class="col-md-7 pref_label">
+                    Estimate home delivery time:
+                </div>
+                <div class="col-md-5">
+                    <div class="mt-success-select">
+                        <div class="icon-wrap">
+                            <i class="fa fa-angle-down text-light"></i>
+                        </div>
+                        <ng-select [items]="estimate_times" bindLabel="name" bindValue="id" placeholder="Delivery time"
+                         [(ngModel)]="es_delivery_time" (change)="esDeliveryTime($event)" name="es_delivery_time"></ng-select>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-7 pref_label">
+                    Estimate order collection time:
+                </div>
+                <div class="col-md-5">
+                    <div class="mt-success-select">
+                        <div class="icon-wrap">
+                            <i class="fa fa-angle-down text-light"></i>
+                        </div>
+                        <ng-select [items]="estimate_times" bindLabel="name" bindValue="id" placeholder="Collection time"
+                        [(ngModel)]="es_collection_time" (change)="esCollectionTime($event)" name="es_collection_time"></ng-select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 pref_label">
+                    Minimum order price for home delivery:
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input type="text" class="mt-input" name="min_delivery_price" id="min_delivery_price"  placeholder="£ 20.00" 
+                        [ngModel]="min_delivery_price | number: '1.2-2'" [ngClass]="{'mt-success-input': min_delivery_price !== undefined}" 
+                        (focusout)="min_delivery_price = numberFormat($event)" [textMask]="{mask: priceMask}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 pref_label">
+                    Minimum order price for collection:
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input type="text" class="mt-input" name="min_collection_price" id="min_collection_price"  placeholder="£ 20.00" 
+                        [ngModel]="min_collection_price | number: '1.2-2'" [ngClass]="{'mt-success-input': min_collection_price !== undefined}" 
+                        (focusout)="min_collection_price = numberFormat($event)" [textMask]="{mask: priceMask}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 pref_label">
+                    Delivery charges:
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input type="text" class="mt-input" name="delivery_fee" id="delivery_fee"  placeholder="£ 0.50" 
+                        [ngModel]="delivery_fee | number: '1.2-2'" [ngClass]="{'mt-success-input': delivery_fee !== undefined}" 
+                        (focusout)="delivery_fee = numberFormat($event)" [textMask]="{mask: priceMask}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 pref_label">
+                    Home delivery area radius:
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input type="text" class="mt-input" name="delivery_radius" id="delivery_radius"  placeholder="3 mile" 
+                        [(ngModel)]="delivery_radius" [ngClass]="{'mt-success-input': delivery_radius}" [textMask]="{mask: radiusMask}" (focusout)="drawMapCircle()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="googleMap" style="width:100%;height:335px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="my-5 text-center">Business Hours</h2>
+    <div class="row">
+        <div class="col-lg-6 mb-2" *ngFor="let setting of day_settings; let i=index;">
+            <div class="row day_section">
+                <div class="col-12">
+                    <h5 class="mb-3 text-danger">{{displayDay(i)}}</h5>
+                    <div class="d-flex mb-3">
+                        <div class="p2 mr-auto text-left">
+                            <p class="open_radio" (click)="setting.open = true">
+                                <input type="radio" id="open{{i}}" name="open_group{{i}}" [checked]="setting.open">
+                                <label for="open{{i}}" class="color-gray mb-3" [ngClass]="{'color-orange': setting.open}">Open</label>
+                            </p>
+                            <p class="open_radio" (click)="setting.open = false">
+                                <input type="radio" id="close{{i}}" name="open_group{{i}}" [checked]="!setting.open">
+                                <label for="close{{i}}" class="color-gray" [ngClass]="{'text-danger': !setting.open}">Close</label>
+                            </p>
+                        </div>
+                        <div class="p2 mr-auto text-left pt-1" *ngIf="setting.open">
+                            <label class="checkbox-wrap">
+                                <span class="text-color color-orange">Collection</span>
+                                <input type="checkbox" [checked]="true" disabled>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-wrap" >
+                                <span class="text-color" [ngClass]="{'color-orange': setting.has_delivery}">Delivery available</span>
+                                <input type="checkbox" [checked]="setting.has_delivery" [(ngModel)]="setting.has_delivery">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="p2 mr-auto text-left pt-1" *ngIf="!setting.open">
+                            <label class="checkbox-wrap">
+                                <span class="color-light-gray">Collection</span>
+                                <input type="checkbox" [checked]="false" disabled>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-wrap" >
+                                <span class="color-light-gray">Delivery available</span>
+                                <input type="checkbox" [checked]="false" disabled>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>  
+                    <div class="row mb-3">
+                        <div class="col-md-5">
+                            <div class="color-gray font-3">Opening time</div>
+                            <timepicker [mousewheel]="false" [(ngModel)]="setting.opening_time" [disabled]="!setting.open"></timepicker>
+                        </div>
+                        <div class="col-md-2 text-center d-flex align-items-center">
+                            <div class="text-danger pt-3">to</div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="color-gray font-3">Closing time</div>
+                            <timepicker [mousewheel]="false" [(ngModel)]="setting.closing_time" [disabled]="!setting.open"></timepicker>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="color-gray font-3">Delivery start time</div>
+                            <timepicker [mousewheel]="false" [(ngModel)]="setting.start_time" [disabled]="!setting.open || !setting.has_delivery"></timepicker>
+                        </div>
+                        <div class="col-md-2 text-center d-flex align-items-center">
+                            <div class="text-danger pt-3">to</div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="color-gray font-3">Delivery end time</div>
+                            <timepicker [mousewheel]="false" [(ngModel)]="setting.end_time" [disabled]="!setting.open || !setting.has_delivery"></timepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-2 dayset_result_section">
+            <h4 class="my-4">Your selected bussiness hours</h4>
+            <div class="row">
+                <div class="col-4">
+                    <p *ngFor="let day of day_names">{{day}}</p>
+                </div>
+                <div class="col-8 color-orange">
+                    <p *ngFor="let setting of day_settings">{{displayTime(setting)}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-4 offset-md-4">
+            <button type="button" name="save_btn" id="save_btn" class="btn mt-btn btn-lg btn-block" (click)="save()">Save</button>
+        </div>
+    </div>
+</div>
+    

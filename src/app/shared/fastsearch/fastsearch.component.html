@@ -1,0 +1,18 @@
+
+<div id="fastsearch_section" *ngIf="status_service.fast_search">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 mt-5">
+            <h2 class="text-light">Find Yourself Good Butchers</h2>
+            <div class="row mb-5">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <input type="text" class="mt-input text-center" name="post_code" id="post_code" [(ngModel)]="post_code" placeholder="POST CODE">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <button type="button" name="search_btn" id="search_btn" class="btn mt-btn btn-lg btn-block" (click)="search()">FAST SEARCH</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

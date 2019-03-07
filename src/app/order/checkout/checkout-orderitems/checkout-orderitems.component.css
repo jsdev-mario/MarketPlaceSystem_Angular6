@@ -1,0 +1,116 @@
+.butcher_section{
+    padding-bottom: 0.5rem;
+    background-color: white;
+}
+
+.header-butcher-logo-wrap{
+    position: relative;
+    width: 100%;
+    height: 125px;
+}
+
+.header-butcher-logo-wrap img{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.header-butcher-deflogo{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    top: 50%;
+    left: 50%;
+    padding: 0;
+    background-color: #F6931D;
+    transform: translate(-50%, -50%)
+}
+
+
+.header-butcher-deflogo p{
+    padding-top: 15px !important;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'amble-light' !important;
+}
+
+
+.shop_intro_wrap p{
+    margin: 0;
+    padding: 0;
+}
+
+.shop_intro_wrap{
+    background-color: #f3f2f2;
+    padding-bottom: 0.7rem;
+    padding: 0.5rem;
+}
+
+.checkoutitems_section{
+    padding: 0.5rem;
+}
+
+.order-item {
+    display: flex;
+    justify-content: end;
+    padding: 0.3rem;
+    background-color: lightgrey;
+    margin-bottom: 0.5rem;
+    text-align: right;
+}
+
+.item-details {
+    padding-left: 0.5rem;   
+    text-align: right; 
+    flex-grow: 1;
+}
+
+.price_content{
+    flex-basis: 65px;
+}
+
+.order-items {
+    border-bottom: 2px dashed #3a3a3a;
+    padding-bottom: 0.5rem;
+}
+
+.price_content svg{
+    cursor: pointer;
+}
+
+.price_content .control_btn{
+    text-align: right;
+    width: 25px;
+}
+
+.delivery_option_wrap{
+    display: flex
+}
+
+.delivery_option_wrap .option{
+    flex: 1;
+}
+
+.option p{
+    margin-bottom: 0;
+}
+
+.min_price_wrap p{
+    padding: 0;
+    margin: 0;
+}
+
+.min_priceintor_wrap small{
+    display: block;
+    line-height: 15px;
+}
+
+.save_wrap small{
+    display: block;
+    line-height: 15px;
+}

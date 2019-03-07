@@ -1,0 +1,7 @@
+<app-header *ngIf="header_style === 0"></app-header>
+<app-butheader *ngIf="header_style === 1"></app-butheader>
+<app-orderheader *ngIf="header_style === 2"></app-orderheader>
+<section id="main-section">
+    <router-outlet></router-outlet>
+</section>
+<app-footer></app-footer>

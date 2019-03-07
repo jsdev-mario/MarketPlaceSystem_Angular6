@@ -1,0 +1,37 @@
+/*** common footer *****/
+
+footer{
+    padding: 2rem 0;
+    width: 100%;
+    color: #616161;
+    background-color: #f1f1f2;
+}
+
+footer p{
+    font-size: 0.8rem;
+    padding: 0;
+    margin: 0;
+}
+
+footer p a{
+    color: #616161;
+}
+
+footer .h6{
+    color: #3b3b3b;
+}
+
+.icon{
+    width: 35px;
+    height: 35px;
+}
+
+.store-icon{
+    width: 120px;
+    height: 35px;
+}
+
+.pay-icon{
+    width: 50px;
+    height: 35px;
+}

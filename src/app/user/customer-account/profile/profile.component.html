@@ -1,0 +1,61 @@
+<div class="profile_section">
+    <h4 class="mb-4">Profile & Communication Preference</h4>
+    <div class="row profile_content">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="form-group mb-2">
+                <label for="title" class=" ">Title</label>
+                <div class="mt-success-select">
+                    <div class="icon-wrap">
+                        <i class="fa fa-angle-down text-light"></i>
+                    </div>
+                    <ng-select [items]="titles" bindLabel="name" bindValue="id" placeholder="Select your title" [(ngModel)]="title" name="title"></ng-select>
+                </div>
+            </div>
+            <div class="form-group mb-2">
+                <label for="first_name" class=" ">First Name<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                <input type="text" name="first_name" id="first_name" class="mt-input" [(ngModel)]="first_name" [ngClass]="validation.textInputValidate(first_name)">
+            </div>
+            <div class="form-group mb-2">
+                <label for="last_name" class=" ">Last Name</label>
+                <input type="text" name="last_name" id="last_name" class="mt-input" [(ngModel)]="last_name" [ngClass]="validation.textInputValidate(last_name)">
+            </div>
+            <div class="form-group mb-2">
+                <label for="email" class=" ">Email<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                <input type="text" name="email" id="email" class="mt-input" [(ngModel)]="email" [ngClass]="validation.textInputValidate(email)" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <small class="text-center color-orange">Note: Your order receipts will be emailed to you on your provided email address.</small><br>
+            <div class="text-center color-orange d-flex align-items-center">
+                <small class="color-gray switch_label">{{displaySwitchLabel(email_news)}}</small>
+                <div class="pt-1 mr-2"><ui-switch [(ngModel)]="email_news" size="small" color="#F6931D" defaultBgColor="darkgray"></ui-switch></div>
+                <div class="d-flex align-items-center"><small>Receive emails of deals, discounts and Meat hut news</small></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="form-group" style="margin-bottom: 0">
+                <label for="mobile_phone" class="">Mobile Number<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                <input type="text" class="mt-input" name="mobile_phone" id="mobile_phone" [(ngModel)]="mobile_phone" 
+                    [ngClass]="validation.textInputValidate(mobile_phone)" [textMask]="{mask: phone_mask, guide: false}">
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="text-center color-orange d-flex align-items-center">
+                <small class="color-gray switch_label">{{displaySwitchLabel(order_sms)}}</small>
+                <div class="pt-1 mr-2"><ui-switch [(ngModel)]="order_sms" size="small" color="#F6931D" defaultBgColor="darkgray"></ui-switch></div>
+                <div class="d-flex align-items-center"><small>Receive order updates by SMS</small></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <button class="mt-btn btn-block mb-4" (click)="profileSave()">Save Profile</button>
+        </div>
+    </div>
+</div>

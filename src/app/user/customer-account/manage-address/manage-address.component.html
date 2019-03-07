@@ -1,0 +1,65 @@
+<div class="address_section">
+    <h4>Manage Addresses</h4>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-9">
+            <div class="addr_content">
+                <ul>
+                    <li *ngFor="let address of user.delivery_addresses; let i = index;"  style="overflow: hidden;">
+                        <div class="row">
+                            <div class="col-lg-8 address_body">
+                                <input type="text" [(ngModel)]="address.address_name" [disabled]="!editable[i]" placeholder="Address Name">
+                                <input type="text" [(ngModel)]="address.address_line1" [disabled]="!editable[i]"  placeholder="Address Line1">
+                                <input type="text" [(ngModel)]="address.address_line2" [disabled]="!editable[i]"  placeholder="Address Line2">
+                                <input type="text" [(ngModel)]="address.city" [disabled]="!editable[i]"  placeholder="City">
+                                <input type="text" [(ngModel)]="address.post_code" [disabled]="!editable[i]"  placeholder="Postcode">
+                            </div>
+                            <div class="col-lg-4 text-center mt-2">
+                                <a (click)="editable[i]=true" *ngIf="!editable[i]" class="text-center"><i class="fa fa-edit mr-4"></i></a>
+                                <a (click)="addressSave(i)" *ngIf="editable[i]" class="text-center"><i class="fa fa-save color-orange mr-4"></i></a>
+                                <a (click)="addressRemove(i)" class="text-center"><i class="fa fa-trash text-danger"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="form-group mb-2">
+                <label for="address_line1" class=" ">Address Line1<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                <input type="text" name="address_line1" id="address_line1" class="mt-input" [(ngModel)]="address_line1" [ngClass]="validation.textInputValidate(address_line1)">
+            </div>
+            <div class="form-group mb-2">
+                <label for="address_line1" class=" ">Address Line2</label>
+                <input type="text" name="address_line2" id="address_line2" class="mt-input" [(ngModel)]="address_line2" [ngClass]="validation.textInputOptionalValidate(address_line2)">
+            </div>
+            <div class="form-group mb-2">
+                <label for="city" class=" ">City</label>
+                <input type="text" name="city" id="city" class="mt-input" [(ngModel)]="city" [ngClass]="validation.textInputOptionalValidate(city)">
+            </div>
+            <div class="form-group mb-2">
+                <label for="post_code" class="">Postcode<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                <input type="text" name="post_code" id="post_code" class="mt-input" [(ngModel)]="post_code" [ngClass]="validation.textInputValidate(post_code)">
+            </div>
+            <div class="form-group" style="margin-bottom: 0">
+                <label for="address_name" class="">Address Name<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                <input type="text" name="address_name" id="address_name" class="mt-input" [(ngModel)]="address_name" [ngClass]="validation.textInputValidate(address_name)">
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-lg-7 offset-lg-3">
+            <small class="color-orange">
+                Note: Insert a name for each address you wish to add.<br>
+                This will be easier to identify at checkout, e.g. Home, Work etc
+            </small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <button class="mt-btn btn-block mb-4" (click)="addNewAddress()">Add New Address</button>
+        </div>
+    </div>
+</div>

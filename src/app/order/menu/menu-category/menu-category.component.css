@@ -1,0 +1,30 @@
+ul{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+ul li{
+    list-style: none;
+    border-bottom: 1px solid #f1f1f1;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: lightgrey;
+    word-wrap: break-word;
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+}
+
+ul li:hover{
+    background-color: #F6931D;
+    color: white;
+}
+
+.selected_subcat{
+    background-color: #F6931D !important;
+    color: white;
+}
+
+.cat-list h4{
+    margin-bottom: 4rem;
+}

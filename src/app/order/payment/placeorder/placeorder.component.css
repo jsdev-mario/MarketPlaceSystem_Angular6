@@ -1,0 +1,174 @@
+@media screen and (max-width: 468px){
+    .cash_icon_wrap{
+        height: 35px !important;
+    }
+    .cash_icon_wrap img{
+        height: 16px !important;
+    }
+
+    .cash_method input[type="radio"]:checked+label:before,
+    .cash_method input[type="radio"]:not(:checked)+label:before {
+        top: 9px !important;
+    }
+
+    .cash_method input[type="radio"]:checked+label:after,
+    .cash_method input[type="radio"]:not(:checked)+label:after {
+        top: 12px !important;
+    }
+}
+
+.payment_method{
+    background-color: #f3f2f2;
+    min-height: 200px;
+}
+
+label{
+    width: 100%;
+}
+
+.paymet_subtitle{
+    font-size: 1.2rem;
+    background-color: rgb(230, 230, 230);
+    height: 70px;
+    padding: 0 1.5rem;
+    line-height: 70px;
+}
+
+.cash_icon_wrap{
+    background-color: #F6931D;
+    height: 45px;
+    width: 100%;
+    border-radius: 22.5px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.cash_icon_wrap img{
+    height: 20px;
+}
+
+.cash_method{
+    font-size: 1.2rem;
+}
+
+.collection_timeinfo img:first-child{
+    height: 65px;
+}
+
+.collection_timeinfo img:last-child{
+    height: 60px;
+}
+
+.address{
+    padding: 1rem 1.5rem;
+    background-color: #f3f2f2;
+}
+
+.address p{
+    padding: 0;
+    margin: 0;
+}
+
+#paypal-button, #paypal-credit-button{
+    background-color: transparent;
+    width: 100%;
+}
+
+.paypal_account p, .paypalcredit_account p{
+    padding: 0;
+    margin: 0;
+}
+
+.paypal_account img, .paypalcredit_account img{
+    height: 15px;
+}
+
+.paypal_account, .paypalcredit_account{
+    border-bottom: 1px solid lightgray;
+}
+
+
+
+/**** custom radio button *****/
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+[type="radio"]:checked+label,
+[type="radio"]:not(:checked)+label {
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+}
+
+[type="radio"]:checked+label:before,
+[type="radio"]:not(:checked)+label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+
+[type="radio"]:checked+label:after,
+[type="radio"]:not(:checked)+label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #F6931D;
+    position: absolute;
+    top: 15px;
+    left: 3px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+[type="radio"]:not(:checked)+label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+[type="radio"]:checked+label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.cash_method input[type="radio"]:checked+label:before,
+.cash_method input[type="radio"]:not(:checked)+label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+
+.cash_method input[type="radio"]:checked+label:after,
+.cash_method input[type="radio"]:not(:checked)+label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #F6931D;
+    position: absolute;
+    top: 16px;
+    left: 3px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}

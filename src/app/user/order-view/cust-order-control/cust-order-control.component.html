@@ -1,0 +1,52 @@
+<div class="order-control">
+    <div class="row mb-4 mt-3 mb-5">
+        <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-6 offset-sm-3 col-8 offset-2">
+            <div class="order_status_block d-flex align-items-center" [ngClass]="getStatusBoxColor()">
+                <img src="assets/images/orderstatus/{{getStatusIcon()}}.png" alt="">
+                <div class="status_text pl-3">
+                    <p class="text-light p-0 m-0">Current Status</p>
+                    <p class="text-light font-2 p-0 m-0">{{getOrderStatus()}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <p class="text-center p-0 mb-5 font-1">
+                        {{displayOrderStatusDescription()}} <span class="text-danger" *ngIf="order.status === this.order_status_consts.READY_COLLECTION">shop closing time {{this.getButcherClosingTime()}}</span>
+                    </p>
+                    <p class="text-center p-0 mb-3 font-2" *ngIf="isOrderInProcessing()">
+                        If you have any enquiries relating to this order, please call the butcher on 
+                        <span class=" text-danger">{{order.butcher.shop.shop_phone}}</span> and for all other enquireis, visit our <a [routerLink]="['/weare/faq']">FAQs.</a> 
+                    </p>
+                    <div class="form-group text-center" *ngIf="isOrderCancelOrReject()">
+                        <button class="mt-btn btn" (click)="gotoSearch()">Find Other Butcher</button>
+                    </div>
+                    <div *ngIf="isOrderCompleted()" class="text-left">
+                        <p *ngIf="!this.order.rated">Hi {{getOrderCustName()}}, How was your overall experience with us?</p>
+                        <label for="" class="font-3">Meat quality&nbsp;&nbsp;&nbsp;<span class=" color-orange">{{this.rate_description[this.order.rates.quality-1]}}</span></label>
+                        <star-rating [starType]="'svg'" [rating]="this.order.rates.quality" [readOnly]="order.rated" (starClickChange)="rateQuaityChange($event)"></star-rating>
+                        <label for="" class="font-3">Butcher service&nbsp;&nbsp;&nbsp;<span class=" color-orange">{{this.rate_description[this.order.rates.service-1]}}</span></label>
+                        <star-rating [starType]="'svg'" [rating]="this.order.rates.service" [readOnly]="order.rated" (starClickChange)="rateServiceChange($event)"></star-rating>
+                        <label for="" class="font-3">Delivery time&nbsp;&nbsp;&nbsp;<span class=" color-orange">{{this.rate_description[this.order.rates.time-1]}}</span></label>
+                        <star-rating [starType]="'svg'" [rating]="this.order.rates.time" [readOnly]="order.rated" (starClickChange)="rateTimeChange($event)"></star-rating>
+                        <label for="" class="font-3">Delivery fee&nbsp;&nbsp;&nbsp;<span class=" color-orange">{{this.rate_description[this.order.rates.fee-1]}}</span></label>
+                        <star-rating [starType]="'svg'" [rating]="this.order.rates.fee" [readOnly]="order.rated" (starClickChange)="rateFeeChange($event)"></star-rating>
+                        <label for="" class="font-3">Overall experience with Meat Hut&nbsp;&nbsp;&nbsp;<span class=" color-orange">{{this.rate_description[this.order.rates.experience-1]}}</span></label>
+                        <star-rating [starType]="'svg'" [rating]="this.order.rates.experience" [readOnly]="order.rated" (starClickChange)="rateExperienceChange($event)"></star-rating>
+                        <div class="form-group text-center mt-4" *ngIf="!this.order.rated">
+                            <button class="mt-btn btn" (click)="submitRate()">Submit Rating</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Meat quality 
+Butcher service
+Delivery time
+Delivery fee
+Overall experience with Meat Hut -->

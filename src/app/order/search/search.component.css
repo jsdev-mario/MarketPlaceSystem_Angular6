@@ -1,0 +1,109 @@
+
+/**--- search filed --****/
+.search-fild{
+    display: flex;
+    height: 50px;
+    width: 100%;
+    border: 1px solid #F6931D;
+    box-sizing: content-box;
+    border-radius: 5px;
+}
+
+.search-fild .value-wrap{
+    flex-grow: 1;
+}
+
+.value-wrap input{
+    width: 100%;
+    height: 100%;
+    font-size: 1.3rem;
+    padding: 0 1rem;
+    outline: none;
+    border:none;
+    color: #231f20;
+    background-color: transparent;
+}
+
+.search-fild .icon-wrap{
+    position: relative;
+    flex-basis: 50px;
+    height: 50px;
+    width: 50px;
+    background-color: #F6931D;
+}
+
+.search-select{
+    position: relative;
+    display: block;
+    height: 50px;
+    width: 100%;
+    border: 1px solid #F6931D;
+    box-sizing: content-box;
+    border-radius: 5px;
+}
+
+.search-select .icon-wrap{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 50px;
+    width: 50px;
+    background-color: #F6931D;
+}
+
+.meat-type-icon{
+    width: 50px;
+    height: 50px;
+}
+
+.icon-wrap svg{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+
+/**** ng select cusomize ****/
+:host /deep/ ng-select .ng-control{
+    background-color: transparent !important;
+    height: 50px !important;
+    border: none;
+    outline: none;
+    font-size: 1.3rem;
+    color: #231f20;
+}
+
+:host /deep/ ng-select .ng-value{
+    font-size: 1.3rem;
+    color: #231f20;
+}
+
+:host /deep/ ng-select .ng-input{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.marked{
+    background-color: #fcb35f !important;
+}
+
+:host /deep/ ng-select .ng-option{
+    background-color: #F6931D !important;
+    color: white !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel{
+    background-color: #F6931D !important;
+    border: 1px solid #F6931D !important;
+}
+
+:host /deep/ ng-select .ng-arrow{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-clear{
+    display: none !important;
+}

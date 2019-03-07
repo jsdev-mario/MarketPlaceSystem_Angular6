@@ -1,0 +1,9 @@
+@media screen and (max-width: 768px){
+    .guide{
+        margin: 0 !important;
+    }    
+}
+
+.guide{
+    margin: -2rem 0;
+}

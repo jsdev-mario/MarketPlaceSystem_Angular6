@@ -1,0 +1,26 @@
+<div class="company-item">
+    <div class="company-item-header">
+        <p (click)="viewMenu()" class="point shop_name">{{butcher.shop.shop_name}}</p>
+        <small>{{displayMeatType()}}</small>
+    </div>
+    <div class="company_default_logo point" *ngIf="!butcher.shop.shop_logo" (click)="viewMenu()">
+        <p>{{displayAbbreName()}}</p>
+    </div>
+    <img [src]="butcher.shop.shop_logo" alt="" class="company-logo point" *ngIf="butcher.shop.shop_logo" (click)="viewMenu()">
+    <div class="company-item-body mt-2">
+        <div class="color-orange">
+            <star-rating [starType]="'svg'" [rating]="butcher.shop.rate" [readOnly]="true"></star-rating>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 but_info">
+                <p class="text-danger" *ngIf="isOffline()">Currently offline</p>
+                <p *ngIf="!isOffline()">{{displayAvailablePrice()}}</p>
+                <p *ngIf="!isOffline()">{{displayStartTime()}}</p>
+                <p *ngIf="displayStartTime() === '' || isOffline()">&nbsp;</p>
+                <p *ngIf="!isOffline()">{{displayOpenTime()}}</p>
+                <p *ngIf="displayOpenTime() === '' || isOffline()">&nbsp;</p>
+                <p><i class="fa fa-map-marker-alt mr-3"></i>{{butcher.distance}} mile</p>
+            </div>
+        </div>
+    </div>
+</div>

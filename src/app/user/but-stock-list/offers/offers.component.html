@@ -1,0 +1,95 @@
+<h4 class="mt-4">Offers</h4>
+<div class="row mb-4 font-2" id="cat-list-section">
+    <div class="col-xl-5" id="cat-list-wrap">
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Main item list</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let category of filterCat(stlist_service.categories); let i = index" (click)="categorySelected(category)" 
+                    [ngClass]="{'active': category === stlist_service.selected_offer_category}">
+                        <div class="cell">
+                            <div>{{category.name}}</div>
+                            <div>
+                                <i class="fa fa-angle-right text-right color-orange"></i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="list-content-wrap">
+            <h6 class="mt-2">Sub category</h6>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let subcategory of stlist_service.selected_offer_subcategories; let i = index" (click)="subcategorySelected(subcategory)"
+                     [ngClass]="{'active': subcategory === stlist_service.selected_offer_subcategory && subcategory.is_available}">
+                        <div class="" style="display: flex; height: 30px;">
+                            <div style="width: 50%;">{{subcategory.name}}</div>
+                            <div style="width: 25%; text-align: right;">{{displayUnit(subcategory)}}</div>
+                            <div style="width: 25%; text-align: right; padding-right: 5px;" class="color-orange">£ {{subcategory.price | number: '1.2-2'}}</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-7" id="offer-list-wrap">
+        <div class="list-content-wrap">
+            <div class="mt-2" style="display: flex;">
+                <div style="width: 45%;">
+                    <h6>Offers</h6>
+                </div>
+                <div style="width: 35%; padding-left: 15px;">
+                    <h6>Qty</h6>
+                </div>
+                <div style="width: 10%; text-align: right; padding-right: 15px;">
+                    <h6>Price</h6>
+                </div>
+                <div style="width: 10%; text-align: right; padding-right: 15px;">
+                    <h6>Discount</h6>
+                </div>
+            </div>
+            <div class="list-content">
+                <ul>
+                    <li *ngFor="let subcategory of stlist_service.selected_offer_subcategories; let i = index"
+                        [ngClass]="{'active': subcategory === stlist_service.selected_offer_subcategory && subcategory.is_available}">
+                        <div style="display: flex; height: 30px;">
+                            <div style="width: 40%; border-right: 1px solid lightgray; position: relative;" 
+                            [ngClass]="{'text-danger': !subcategory.is_available}" (click)="subcategorySelected(subcategory)">
+                                {{subcategory.name}}
+                                <div class="control_group">
+                                    <a (click)="deleteOffer(i)">
+                                        <i class="fa fa-trash mx-2 text-danger"></i>
+                                    </a>
+                                </div>
+                                <div class="control_group available">
+                                    <input type="checkbox" [ngModel]="subcategory.is_available" disabled readonly>
+                                </div>
+                            </div>
+                            <div style="width: 10%; border-right: 1px solid lightgray;" *ngIf="subcategory.offer">
+                                <input type="text" [textMask]="{mask: number_mask, guide: false}" [(ngModel)]="subcategory.offer.qty" class="text-center"
+                                 [disabled]="subcategory !== stlist_service.selected_offer_subcategory || !subcategory.is_available" >
+                            </div>
+                            <div style="width: 5%; text-align: center;" *ngIf="subcategory.offer">&times;</div>
+                            <div style="width: 15%; text-align: right; padding-right: 5px; word-wrap: none; font-size: 0.7rem" 
+                                *ngIf="subcategory.offer && subcategory.qty * subcategory.offer.qty >= 1000">
+                                {{displayUnit1(subcategory)}}
+                            </div>
+                            <div style="width: 15%; text-align: right; padding-right: 5px; word-wrap: none;" 
+                                *ngIf="subcategory.offer && subcategory.qty * subcategory.offer.qty < 1000">
+                                {{displayUnit1(subcategory)}}
+                            </div>
+                            <div style="width: 5%; border-right: 1px solid lightgray; text-align: right; padding-right: 5px;" *ngIf="subcategory.offer">For</div>
+                            <div class="color-orange" style="width: 5%; text-align: right; padding-right: 5px;" *ngIf="subcategory.offer">£</div>
+                            <div style="width: 10%; text-align: right; border-right: 1px solid lightgray;" *ngIf="subcategory.offer">
+                                <input type="text" [textMask]="{mask: price_mask, guide: false}" [ngModel]="subcategory.offer.price | number:'1.2-2'" 
+                                (focusout)="subcategory.offer.price = numberFormat($event)" class="color-orange" style="padding-right: 5px;" [disabled]="subcategory !== stlist_service.selected_offer_subcategory || !subcategory.is_available">
+                            </div>
+                            <div style="width: 10%; text-align: right; padding-right: 5px;" *ngIf="subcategory.offer" [ngClass]="{'text-danger': discount(subcategory) <= 0}">£ {{discount(subcategory) | number:'1.2-2'}}</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

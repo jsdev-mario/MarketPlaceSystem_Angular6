@@ -1,0 +1,9 @@
+#fastsearch_section{
+    width: 100%;
+    background-color: transparent;
+}
+
+input, button{
+    font-size: 1.2rem;
+    height: 60px;
+}

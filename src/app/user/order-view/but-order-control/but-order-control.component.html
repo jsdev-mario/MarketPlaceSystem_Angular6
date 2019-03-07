@@ -1,0 +1,170 @@
+<div class="order-control">
+    <div class="row mb-4 mt-3">
+        <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-6 offset-sm-3 col-8 offset-2">
+            <div class="order_status_block d-flex align-items-center" [ngClass]="order_statuscontrol_color[order.status]">
+                <img src="assets/images/orderstatus/{{getStatusIcon()}}.png" alt="">
+                <div class="status_text pl-3">
+                    <p class="text-light p-0 m-0">Current Status</p>
+                    <p class="text-light font-2 p-0 m-0">{{getOrderStatus()}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="order.status !== order_status_consts.CANCELLED_BYCUST && order.status !== order_status_consts.REJECTED_BYBUT">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="row mb-3" *ngIf="canDisplayUpdateStatus()">
+                    <div class="col-md-6 offset-md-3">
+                        <button class="btn mt-btn btn-block" (click)="displayPreorderModal()"><i class="fa fa-search mr-2"></i>Prepare Order</button>
+                    </div>
+                </div>
+                <div class="row mb-2" *ngIf="canDisplayUpdateStatus()">
+                    <div class="col-md-6 offset-md-3 mb-1">
+                        <div class="mt-success-select">
+                            <div class="icon-wrap">
+                                <i class="fa fa-angle-down text-light"></i>
+                            </div>
+                            <ng-select [items]="order_control_actions" bindLabel="name" bindValue="id" [(ngModel)]="new_status" name="new_status"></ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="new_status !== order_status_consts.CANCELLED_BYCUST && new_status !== order_status_consts.REJECTED_BYBUT">
+                    <p class="text-center mb-2" *ngIf="order.status === order_status_consts.AWAITING_CONFIRMATION">Please confirm expected time of {{getOrderDeliveryLabel() | lowercase}}</p>
+                    <div class="row" *ngIf="order.status === order_status_consts.AWAITING_CONFIRMATION">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="mt-success-select">
+                                <div class="icon-wrap">
+                                    <i class="fa fa-angle-down text-light"></i>
+                                </div>
+                                <ng-select [items]="delivery_estimes" bindLabel="name" bindValue="id" [(ngModel)]="confirm_delivery_time"
+                                name="confirm_delivery_time"></ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2"  *ngIf="canDisplayUpdateStatus()">
+            <div class="col-12">
+                <div class="form-group m-0 p-0">
+                    <label for="note">Order Note:</label>
+                    <textarea class="form-control" name="note" id="note" rows="3" [(ngModel)]="note" placeholder="Please enter any relevant notes regarding the order status"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3"  *ngIf="new_status === order_status_consts.CANCELLED_BYCUST || new_status === order_status_consts.REJECTED_BYBUT">
+            <div class="col-12">
+                <p class="font-2 p-0 m-0 text-danger">Full refund Amount of £ {{(this.order.sub_price + this.order.delivery_fee) | number: '1.2-2'}} will be issued to the customer</p>
+                <p class="font-2 p-0 m-0 text-danger" *ngIf="order.payment_method === 2">Customer has not been charged</p>
+            </div>
+        </div>
+        <div class="row mb-3" *ngIf="canDisplayUpdateStatus()">
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                <button type="button" name="updatebtn" id="updatebtn" class="btn mt-btn btn-block" (click)="updateStatus()">Upate status</button>
+            </div>
+        </div>
+        <div *ngIf="canDisplayRefundSection()">
+            <div class="row mb-2">
+                <div class="col-12">
+                    <div class="form-group mb-0">
+                        <label for="refund_note">Refund Note:</label>
+                        <textarea class="form-control" name="refund_note" id="refund_note" rows="3" 
+                        [(ngModel)]="refund_note" placeholder="Please enter any relevant notes regarding the refund"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-6 font-2 text-right">Refund Amount: </div>
+                        <div class="col-sm-8 col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="mt-input" name="refund_amount" id="refund_amount"  placeholder="£ 0.00" 
+                                    [ngModel]="refund_amount | number: '1.2-2'" [ngClass]="{'mt-success-input': refund_amount !== undefined}" 
+                                    (focusout)="refund_amount = numberFormat($event)" [textMask]="{mask: priceMask}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <button type="button" name="refundreqbtn" id="refundreqbtn" class="btn mt-btn btn-block" (click)="refundRequest()">Send Refund Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row order_history mt-5 mb-3">
+        <div class="col-12">
+            <p class="mb-1 p-0">Order History</p>
+            <ul class="m-0 p-0">
+                <li class="d-flex" *ngFor="let history of order?.history">
+                    <div class="text-center font-2 pt-2 d-flex align-items-center" [ngClass]="order_statuscontrol_color[history.status]">
+                        {{getDate(history.date)}}
+                    </div>
+                    <div class="history_detail p-1">
+                        <p class="font-3 font-weight-bold mb-0">{{(history.status !== order_status_consts.REFUND_REQUEST &&
+                                history.status !== order_status_consts.REFUND_PROCESSED) ? 'Order' : ''}} {{order_statuses[history.status]}}</p>
+                        <p class="font-4 mb-0 color-gray" *ngIf="history.status === order_status_consts.AWAITING_CONFIRMATION">{{order?.order_id}}</p>
+                        <p class="font-4 mb-0 color-orange" 
+                            *ngIf="history.note && history.note !== '' && 
+                            (history.status !== order_status_consts.REFUND_REQUEST &&
+                            history.status !== order_status_consts.REFUND_PROCESSED)">Order Note: {{history.note}}</p>
+                        <p class="font-4 mb-0 color-orange" 
+                            *ngIf="history.note && history.note !== '' && 
+                            (history.status === order_status_consts.REFUND_REQUEST ||
+                            history.status === order_status_consts.REFUND_PROCESSED)">Refund Note: {{history.note}}</p>
+                        <p class="font-4 mb-0 color-gray">{{getHistoryDescription(history)}}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn btn-primary btn-lg d-none" data-toggle="modal" data-target="#preorder_modal"></button>
+<div class="modal fade" id="preorder_modal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modelTitleId">Prepare Order:  {{order.order_id}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class=" font-2 color-orange">Note: Please pack chicken thigh boneless in two 500g bags.</p>
+                <div class="order_detials_content">
+                    <div class="order_items">
+                        <table class="table table-bordered font-2 text-right">
+                            <thead>
+                                <tr>
+                                    <th>Customer's Order</th>
+                                    <th>£ Price</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let order_item of order.order_items; let i = index;">
+                                    <td scope="row">
+                                        <p class="text-right m-0 p-0">{{order_item.count}} &times; {{displayMenuName(order_item.product)}}</p>
+                                        <p *ngFor="let choice of order_item.choices" class="text-danger text-right m-0 p-0">{{choice.name}}<br></p>
+                                    </td>
+                                    <td>
+                                        <div class="color-dark-gray"><p class=" m-0 p-0">£ {{order_item.sub_price | number: '1.2-2'}}</p></div>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="form-check-input" name="item{{i}}" id="item{{i}}" 
+                                        (change)="preorderCheckItem(order_item)" [checked]="order_item.prepare_order">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn mt-btn btn-block w-50" data-dismiss="modal">Go Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+

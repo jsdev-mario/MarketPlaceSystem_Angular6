@@ -1,0 +1,73 @@
+<div class="container signup">
+	<h2> Customer Sign up </h2>
+	<div class="row">
+		<div class="col-md-6 col-lg-4 offset-lg-4 offset-md-3">
+			<div class="form-group">
+				<input type="email" class="mt-input" name="email" id="email" placeholder="Email Address" [(ngModel)]="email" [ngClass]="validation.textInputValidate(email)">
+			</div>
+			<div class="form-group pass_text_group">
+				<input [type]="passInputType()" class="mt-input" name="password" id="password" placeholder="Password" [(ngModel)]="password" [ngClass]="validation.textInputValidate(password)">
+				<small class="form-text text-muted">
+					Password must be at least 8 characters long.<br>
+					(Please include letters and numbers)
+				</small>
+				<button class="pass_eye point" (click)="show_pass = true" *ngIf="!show_pass"><i class="fa fa-eye-slash color-orange"></i></button>
+				<button class="pass_eye point" (click)="show_pass = false" *ngIf="show_pass"><i class="fa fa-eye color-orange"></i></button>
+			</div>
+			
+			<div class="form-group">
+				<input type="text" class="mt-input" name="post_code" id="post_code" placeholder="Postcode" 
+				[(ngModel)]="post_code" [ngClass]="validation.textInputOptionalValidate(post_code)" (focus)="poscodeFocuse()" (focusout)="poscodeFocuseOut()">
+			</div>
+			<button type="button" id="pdlg_btn"class="btn btn-primary d-none" data-toggle="modal" data-target="#policy_dlg"></button>
+			<label class="checkbox-wrap mb-4">
+				<span [ngClass]="{'color-orange': policy}">I accept the Terms of Use & Privacy Policy</span>
+				<input type="checkbox" [checked]="policy" (click)="policyClick($event)">
+				<span class="checkmark"></span>
+			</label>
+			<button type="button" name="sign-btn" id="sign-btn" class="btn mt-btn btn-block text-light mb-3" (click)="signUp()">SIGN UP</button>
+			<button type="button" name="fb-sign-btn" id="fb-sign-btn" class="fb_btn mb-4" (click)="facebookSignUp()">
+				<img src="assets/images/facebookicon.png" class="fb_icon" alt="">
+				LOGIN WITH FACEBOOK
+			</button>
+			<div class="text-right">
+				<a [routerLink]="['/auth/login', 'customer']" class=" color-orange" *ngIf="!return_url">
+					<p><i class="fa fa-user-plus mr-2 "></i>Aleady a member? Log in!</p>
+				</a>
+				<a [routerLink]="['/auth/login', 'customer']"  [queryParams]="{returnUrl: this.return_url}" class=" color-orange" *ngIf="return_url">
+					<p><i class="fa fa-user-plus mr-2 "></i>Aleady a member? Log in!</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="policy_dlg" tabindex="-1" role="dialog" aria-labelledby="policy_dlgTitle" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div>
+					<tabset>
+						<tab heading="Privacy Policy" id="tab1">
+							<h4 class="color-dark-gray mt-4">Lorem ipsum dolor sit amet.</h4>
+							<p class="color-gray">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem ea consequuntur maiores, deserunt mollitia, delectus eos quia accusamus nihil debitis ratione consectetur aut nisi amet porro libero expedita non quas? Iusto quidem exercitationem error tenetur ad ipsa repellendus sapiente sint officiis doloribus modi omnis dolor perferendis molestias alias quasi earum tempore, quod pariatur! Fugit consectetur ea officia, suscipit ipsam distinctio, quibusdam minus sint vel nesciunt reiciendis laborum quae voluptates delectus. Hic animi quae voluptatibus aliquid pariatur fuga in! Itaque cum deleniti molestias officia, error repudiandae aliquid voluptate, nostrum quibusdam, doloremque excepturi voluptatibus beatae voluptatum! Corrupti sapiente quidem natus explicabo impedit!</p>
+							<h4 class="color-dark-gray">Lorem ipsum dolor sit amet consectetur.</h4>
+							<p class="color-gray">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium reprehenderit ea similique, cum nemo eveniet laboriosam libero? Laborum voluptas deleniti dolores cumque error provident ipsa earum dolorem, magnam consectetur obcaecati nulla, ea, recusandae ratione quae quisquam neque voluptate libero labore quam dicta debitis. Cupiditate minus saepe rem non nemo, vero repudiandae vitae exercitationem tempora itaque dolores et aliquid error? Suscipit nulla molestiae fugit, inventore itaque cum ab. Ullam deserunt voluptatem ex. Incidunt ipsum repellat, unde temporibus quos placeat ullam ea, sequi, mollitia corrupti excepturi aliquam labore quam autem. Labore maxime assumenda soluta adipisci rem sed, dignissimos tenetur magnam odit aliquid.</p>
+							
+						</tab>
+						<tab heading="Terms of Use">
+							<h4 class="color-dark-gray mt-4">Lorem ipsum dolor sit.</h4>
+							<p class="color-gray">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime tempore maiores aliquam dolorem quibusdam blanditiis asperiores sunt ratione non omnis enim ex dolor facere beatae, magni necessitatibus ipsum ab? Sapiente odio, beatae harum esse veniam aperiam quam eius facilis quisquam animi atque illum iste reiciendis autem quis repellat quaerat inventore ipsam ducimus? Dolore quo fuga consequatur voluptas eveniet rerum quisquam iure. Recusandae, iste tenetur? Tenetur quas provident corrupti necessitatibus voluptates blanditiis eos voluptate laudantium sequi officia? Assumenda, expedita aliquam laborum odit eligendi corporis velit! Maiores nemo placeat atque praesentium molestias id a beatae ratione sint ab dicta, dignissimos accusantium officia.</p>
+							<h4 class="color-dark-gray">Lorem ipsum dolor sit amet.</h4>
+							<p class="color-gray">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus nihil minus libero recusandae quasi voluptatem ducimus, tenetur ad odio? Exercitationem autem expedita pariatur harum magnam dolor temporibus et. Minus itaque nisi praesentium esse alias cupiditate delectus sint consequuntur fugiat facilis? Quibusdam repudiandae quas officiis totam, eum quos vel! Consectetur earum molestias quod debitis similique! Asperiores voluptate esse nemo numquam atque minus animi tempora soluta, obcaecati consequuntur eos provident, quasi facere fugit alias itaque dolore, quam est officiis dolores? Tempore assumenda dolor velit sint alias fugit vitae voluptatem facilis, ratione enim in repellendus deleniti nam, odit, molestiae sed eaque numquam voluptatum doloremque molestias placeat tenetur tempora! Cumque dicta fugit, modi recusandae nam necessitatibus blanditiis culpa sint assumenda voluptatibus enim fuga, maiores quasi inventore eum ipsam sapiente possimus magni esse. Nihil aspernatur fugit mollitia perspiciatis deserunt nisi quam itaque excepturi, voluptates tempore est ullam, fugiat molestias possimus autem natus dolor reiciendis. Cum.</p>
+						</tab>
+					</tabset>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary w-25" data-dismiss="modal">Don't agree</button>
+				<button type="button" class="btn mt-btn w-25" data-dismiss="modal" (click)="policy = true">Agree</button>
+			</div>
+		</div>
+	</div>
+</div>

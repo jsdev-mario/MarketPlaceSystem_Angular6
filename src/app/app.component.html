@@ -1,0 +1,11 @@
+<!-- <div (click)="menuHidden()" style="margin: 0; padding: 0;"> -->
+    <router-outlet></router-outlet>
+    <div class="spinner_wrap" *ngIf="spinner_service.waitting">
+        <div class="spinner_white">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+<!-- </div> -->
+

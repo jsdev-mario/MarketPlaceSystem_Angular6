@@ -1,0 +1,51 @@
+.signup input, .signup .mt-select {
+    height: 50px;
+}
+
+.logo-name{
+    width: 250px;
+    height: 50px;
+}
+
+.signup a{
+    text-decoration: none;
+}
+
+.signup button{
+    height: 50px;
+}
+
+
+.policy_terms{
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0, 0.5);
+}
+
+.signup_section_icon{
+    width: 40px;
+    height: 40px;
+    margin-right: 1rem;
+    margin-top: -10px;
+}
+
+.pass_eye{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 50px;
+    z-index: 200;
+}
+
+.pass_text_group{
+    position: relative;
+}
+
+

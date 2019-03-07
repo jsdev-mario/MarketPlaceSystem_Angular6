@@ -1,0 +1,86 @@
+.go_another_account{
+    color: #F6931D;
+}
+
+.go_another_account:hover{
+    color: rgb(252, 188, 111);
+}
+
+.switch_label{
+    min-width: 40px;
+}
+
+.address_content p{
+    margin: 0;
+    padding: 0;
+}
+
+.addresses_wrap{
+    display: flex;
+}
+
+.addresses_wrap div:first-child{
+    width: 10%;
+}
+.addresses_wrap div:last-child{
+    width: 90%;
+}
+
+.addresses_wrap p{
+    padding: 0;
+    margin: 0;
+}
+
+.modal-footer{
+    border: none!important;
+}
+
+/**** ng select cusomize ****/
+:host /deep/ ng-select .ng-control{
+    background-color: transparent !important;
+    height: 38px !important;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select .ng-value{
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select{
+    width: calc(100% + 4px) !important;
+    margin-left: -2px !important;
+}
+
+
+:host /deep/ ng-select .ng-input{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.marked{
+    background-color: #fcb35f !important;
+}
+
+:host /deep/ ng-select .ng-option{
+    background-color: #F6931D !important;
+    color: white !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel{
+    background-color: #F6931D !important;
+    border: none !important;
+    /* margin-left: -2px!important; */
+    /* margin-right: -4px!important; */
+    
+}
+
+:host /deep/ ng-select .ng-arrow{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-clear{
+    display: none !important;
+}

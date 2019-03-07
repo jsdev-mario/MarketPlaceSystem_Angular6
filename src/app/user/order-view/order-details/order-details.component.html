@@ -1,0 +1,59 @@
+<div class="order-detials">
+    <div class="d-flex justify-content-between">
+        <p class="p-0 m-0">Order #: {{getOrderId()}}</p>
+        <p class="p-0 m-0">Payment Type: {{getPaymentType()}}</p>
+    </div>
+    <div class="delivery_time_note text-center">
+        <img *ngIf="order.delivery_option === 0" src="assets/images/collection_icon.png" alt="">
+        <img *ngIf="order.delivery_option === 1" src="assets/images/delivery_icon.png" alt="">
+        <p class="p-0 m-0 mt-1">Order Type: {{getOrderDeliveryLabel()}}</p>
+        <p class="p-0 m-0 text-danger">Requsted time for {{getOrderDeliveryLabel() | lowercase}}</p>
+        <p class="p-0 m-0 mb-2 text-danger">{{getOrderTime()}}</p>
+        <p *ngIf="isAllocateTime()" class="text-danger text-center p-0 mb-3 font-3">
+           {{getButcherAddedTimeDescription()}}<br>{{this.getButcherConfirmTime()}}
+        </p>
+        <p class="w-100 text-center p-0 mb-2" *ngIf="order?.note && order?.note !== ''">Order</p>
+        <small class="color-orange text-left mb-3" *ngIf="order?.note">{{order?.note}}</small>
+        <div class="order_detials_content">
+            <div class="order_items">
+                <table class="table table-bordered font-2 text-right">
+                    <thead>
+                        <tr>
+                            <th>Customer's Order</th>
+                            <th>£ Price</th>
+                            <th *ngIf="isButcher()"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order_item of order.order_items; let i = index;">
+                            <td scope="row">
+                                <p class="text-right m-0 p-0">{{order_item.count}} &times; {{displayMenuName(order_item.product)}}</p>
+                                <p *ngFor="let choice of order_item.choices" class="text-danger text-right m-0 p-0">{{choice.name}}<br></p>
+                            </td>
+                            <td>
+                                <div class="color-dark-gray"><p class=" m-0 p-0">£ {{order_item.sub_price | number: '1.2-2'}}</p></div>
+                            </td>
+                            <td *ngIf="isButcher()">
+                                <input type="checkbox" class="form-check-input" name="item{{i}}" id="item{{i}}">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngFor="let order_item of order.order_items" class="text-left" style="height: 15px;">
+                    <small class="text-danger font-3" *ngIf="order_item.has_save">{{getOfferInfo(order_item)}}</small>
+                </div>
+                <div class="my-3">
+                    <div class=" d-flex justify-content-between font-2">
+                        <div>Subtotal</div><div>£ {{order?.sub_price | number: '1.2-2'}}</div>
+                    </div>
+                    <div class=" d-flex justify-content-between font-2" *ngIf="order?.delivery_fee !== 0.0">
+                        <div>Delivery fee</div><div>£ {{order?.delivery_fee | number: '1.2-2'}}</div>
+                    </div>
+                </div>
+                <div class=" d-flex justify-content-between font-2 text-danger mb-3">
+                    <div>{{getTotalPaymentLabel()}}</div><div>£ {{(order?.sub_price + order?.delivery_fee) | number: '1.2-2'}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="container" style="margin-top: -2rem; margin-bottom: -2rem;">
+    <div class="row">
+        <div class="col-md mr-md-1 mb-2 order_control_section">
+            <div class="px-2 py-2">
+                <app-but-order-control *ngIf="isButcher()"></app-but-order-control>
+                <app-cust-order-control *ngIf="!isButcher()"></app-cust-order-control>
+            </div>
+        </div>
+        <div class="col-md ml-md-1 mb-2 order_details_section">
+            <div class="px-2 py-2">
+                <app-order-details></app-order-details>
+            </div>
+        </div>
+    </div>
+</div>

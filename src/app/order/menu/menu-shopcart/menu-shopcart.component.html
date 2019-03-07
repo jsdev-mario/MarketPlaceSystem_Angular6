@@ -1,0 +1,95 @@
+<div id="shop-cart"  *ngIf="selected_butcher && selected_butcher.shop">
+    <div class="delivery_option_wrap mb-3">
+        <div class="option">
+            <p (click)="selectDeliveryOption(0)" class="font-3">
+                <input type="radio" id="collection_option" name="del_option-group" [checked]="!order_service.current_order.delivery_option">
+                <label for="collection_option">Collection<br>
+                    <span *ngIf="!is_open">From</span> {{getOpeningTime()}}
+                </label>
+            </p>
+        </div>
+        <div class="option">
+            <p (click)="selectDeliveryOption(1)"  class="font-3">
+                <input type="radio" id="delivery_option" name="del_option-group" [disabled]="!delivery_day_setting.has_delivery"
+                [checked]="order_service.current_order.delivery_option">
+                <label for="delivery_option" [ngClass]="{'color-light-gray': !delivery_day_setting.has_delivery}">Delivery<br>
+                    <span *ngIf="delivery_day_setting.has_delivery && !is_start">From</span> {{getStartTime()}}</label>
+            </p>
+        </div>
+    </div>
+    <div class="min_price_wrap mb-4">
+        <p class="font-3" *ngIf="order_service.current_order.delivery_option === 1">Minimum order: £{{selected_butcher.shop.min_delivery_price | number: '1.2-2'}}</p>
+        <p class="font-3" *ngIf="order_service.current_order.delivery_option === 0">Minimum order: £{{selected_butcher.shop.min_collection_price | number: '1.2-2'}}</p>
+        <p class="font-3">Delivery: {{displayDeliveryFee()}}</p>
+    </div>
+    <div class="min_priceintor_wrap text-danger mb-4" *ngIf="selected_butcher.shop.min_delivery_price - getSubTotalPrice() > 0">
+        <small *ngIf="order_service.current_order.delivery_option === 1">Minimum order is £{{selected_butcher.shop.min_delivery_price | number: '1.2-2'}}. 
+            Please add £{{(selected_butcher.shop.min_delivery_price - getSubTotalPrice()) | number: '1.2-2'}} or more to your basket
+        </small>
+    </div>
+    <div class="min_priceintor_wrap text-danger mb-4" *ngIf="selected_butcher.shop.min_collection_price - getSubTotalPrice() > 0">
+        <small *ngIf="order_service.current_order.delivery_option === 0">Minimum order is £{{selected_butcher.shop.min_collection_price | number: '1.2-2'}}. 
+            Please add £{{(selected_butcher.shop.min_collection_price - getSubTotalPrice()) | number: '1.2-2'}} or more to your basket
+        </small>
+    </div>
+    <h5 class="color-orange text-center mb-2">My Basket</h5>
+    <div class="order-items"  *ngIf="getSubTotalPrice() > 0 && this.order_service.current_order.butcher._id === this.selected_butcher._id">
+        <div class="order-item" *ngFor="let order_item of order_service.current_order.order_items; let i = index;">
+            <div class="item-details">
+                <small class="text-tink color-gray">{{order_item.count}} &times; {{displayMenuName(order_item.product)}}</small>
+                <div class="ml-4">
+                    <small class="text-tink text-danger" *ngFor="let choice of order_item.choices">{{choice.name}}<br></small>
+                </div>
+            </div>
+            <div class="price_content">
+                <div class="color-dark-gray price text-right"><small>£ {{displayOrderItemPrice(order_item) | number: '1.2-2'}}</small></div>
+                <div class="control_btn">
+                    <div (click)="increaseOrderItemCount(i)"><i class="fa fa-plus-circle color-orange"></i></div>
+                    <div (click)="decreaseOrderItemCount(i)"><i class="fa fa-minus-circle text-danger"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="order-items"  *ngIf="getSubTotalPrice() === 0 || this.order_service.current_order.butcher._id !== this.selected_butcher._id">
+        <div class="bg-gray text-center py-3 px-3">
+            Your basket is empty
+        </div>
+    </div>
+    <div class="price-cal-wrap" *ngIf="getSubTotalPrice() > 0  && this.order_service.current_order.butcher._id === this.selected_butcher._id">
+        <div class="row my-4">
+            <div class="col-12 save_wrap text-danger">
+                <div *ngFor="let orderitem of order_service.current_order.offer_orderitems">
+                    <small>{{offer(orderitem)}}</small>
+                </div>
+                <small class="save_price" *ngIf="order_service.current_order.save_price > 0">You save: £ {{order_service.current_order.save_price | number:'1.2-2'}}</small>
+            </div>
+        </div>
+        <div class="row my-2" *ngIf="order_service.current_order.delivery_option === 1">
+            <div class="col-7 color-gray"><small>Subtotal</small></div>
+            <div class="col-5 color-gray text-right"><small>£{{getSubTotalPrice() | number: '1.2-2'}}</small></div>
+        </div>
+        <div class="row my-2" *ngIf="order_service.current_order.delivery_option === 1">
+            <div class="col-7 color-gray" ><small>Delivery fee</small></div>
+            <div class="col-5 color-gray text-right"><small>{{getDeliveryFee()}}</small></div>
+        </div>
+        <div class="row my-2">
+            <div class="col-7 text-danger">Total</div>
+            <div class="col-5 text-danger text-right">£{{getTotalPrice() | number: '1.2-2'}}</div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <button type="button" name="" id="" class="btn btn-secondary btn-lg btn-block"
+            [ngClass]="{'btn-yellow': canCheckOut()}" (click)="gotoCheckOut()" [disabled]="!canCheckOut()">Go to checkout</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="order_note"></label>
+                <textarea class="form-control w-100 font-3" name="order_note" id="order_note" rows="4" 
+                placeholder="Instructions for the butcher" [(ngModel)]="order_service.current_order.note"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

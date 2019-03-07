@@ -1,0 +1,7 @@
+<app-header *ngIf="userType() === 0"></app-header>
+<app-butheader *ngIf="userType() === 1"></app-butheader>
+<section id="main-section">
+    <router-outlet></router-outlet>
+</section>
+<app-fastsearch></app-fastsearch>
+<app-footer></app-footer>

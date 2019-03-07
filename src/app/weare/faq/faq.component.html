@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-6 selbtn pt-2 bg-lightgray point" [ngClass]="{'bg-white': is_custfaq}" (click)="this.selBtn()">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="d-flex">
+                    <img src="assets/images/profile_placeholder.png" alt="">
+                    <div class="ml-2 h5 btn_title">Customer's FAQs</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 selbtn pt-2 bg-lightgray point" [ngClass]="{'bg-white': !is_custfaq}" (click)="this.selBtn()">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="d-flex">
+                    <img src="assets/images/butcher_icon.png" alt="">
+                    <div class="ml-2 h5 btn_title mb-0">Butcher's FAQs</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="is_custfaq"><app-cust-faq></app-cust-faq></div>
+    <div *ngIf="!is_custfaq"><app-but-faq></app-but-faq></div>
+</div>

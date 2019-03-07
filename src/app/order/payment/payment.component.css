@@ -1,0 +1,28 @@
+@media screen and (max-width: 768px){
+    .payment_section{
+        margin-bottom: -1rem !important;
+    }
+
+    #payment_orderitems{
+        margin-bottom: 0rem !important;
+        border: none !important;
+    }
+
+    #payment_infodetails{
+        margin-bottom: 1rem !important;
+    }
+}
+
+.payment_section{
+    margin-top: -1.5rem;
+}
+
+#payment_orderitems{
+    margin-bottom: -1.5rem; 
+    background-color: #f3f2f2;
+    padding: 0;
+}
+
+#payment_infodetails{
+    margin-bottom: -1.5rem; 
+}

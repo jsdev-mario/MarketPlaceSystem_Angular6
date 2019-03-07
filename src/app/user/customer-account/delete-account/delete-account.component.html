@@ -1,0 +1,56 @@
+<div class="delete_section">
+    <h4>Delete My Account</h4>
+    <small class="color-orange mx-4 my-4">
+        Note: You may delete your account at any time, however, we are obliged to keep certain data.
+    </small>
+    <div class="row mt-4">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="form-group pass_text_group" style="margin-bottom: 0">
+                <label for="password" class=" ">Password<strong class="color-orange">&nbsp;&nbsp;*</strong></label>
+                <input [type]="passInputType()" name="password" id="password" class="mt-input" [(ngModel)]="password" [ngClass]="validation.textInputValidate(password)">
+                <button class="pass_eye point" (click)="show_pass = true" *ngIf="!show_pass"><i class="fa fa-eye-slash color-orange"></i></button>
+                <button class="pass_eye point" (click)="show_pass = false" *ngIf="show_pass"><i class="fa fa-eye color-orange"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+            <small class="color-orange">In order to permanently delete your account, please enter your password.</small>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-lg-6 offset-lg-3">
+            <button class="mt-btn btn-block mb-4" (click)="deleteAccount()">Delete Account</button>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="del_dlg" tabindex="-1" role="dialog" aria-labelledby="del_modal_title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-orange">
+                <h5 class="modal-title" id="del_modal_title">ARE YOU SURE YOU WANT TO DO THIS?</h5>
+            </div>
+            <div class="modal-body">
+                <div class="container px-4">
+                    <div class="row d-flex">
+                        <div>
+                            <img src="assets/images/infoicon.png" alt="">
+                        </div>
+                        <div class="d-flex align-items-center pt-3 pl-3">
+                            <h5>This is extremely important</h5>
+                        </div>
+                        <p class="text-justify mt-4 font-2" style="margin-bottom: 0">
+                            When you delete your account, the account will be completely removed from the system and all information including addresses, order history and billing details will be permanently deleted, 
+                            <span class="color-orange">however, we are obliged to keep certain data e.g. payment and delivery address details for any pending transactions.</span> You will be unable to restore your account or any of its data after it has been deleted.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn mt-btn w-50 px-2" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn mt-btn w-50 px-2" data-dismiss="modal" (click)="deleteAccountProc()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<header>
+    <div class="orderheader_top_section d-flex align-items-center pl-4">
+        <img src="assets/images/header_logo.png" alt="" class="top_log_content">
+        <div (click)="goBack()" class="point text-light"><i class="fa fa-arrow-left text-light mr-4"></i><span class="d-none d-md-inline-block">Back</span></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 color-gray py-3 d-flex justify-content-between">
+                <p class="m-0 p-0">Order #: {{getOrderId()}}</p>
+                <div class="point"><i class="fa fa-print mr-2"></i>Print</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md bg-lightgray but_info mr-md-1 mb-2">
+                <div class="px-2 py-2">
+                    <div class="col but_logo">
+                        <div class="butcher_deflogo  bg-orange" *ngIf="!order?.butcher?.shop || !order?.butcher?.shop?.shop_logo">
+                            <p>{{displayAbbreName()}}</p>
+                        </div>
+                        <img [src]="order?.butcher?.shop?.shop_logo" alt="" *ngIf="order?.butcher?.shop && order?.butcher?.shop?.shop_logo"> 
+                    </div>
+                    <h5>{{order?.butcher?.shop?.shop_name}}</h5>
+                    <p class="font-2 p-0 m-0">Tel No.: {{order?.butcher?.shop?.shop_phone}}</p>
+                    <p class="font-2 p-0 m-0">{{order?.butcher?.shop?.address_line1}}</p>
+                    <p class="font-2 p-0 m-0" *ngIf="order?.butcher?.shop?.address_line2">{{order?.butcher?.shop?.address_line2}}</p>
+                    <p class="font-2 p-0 m-0" *ngIf="order?.butcher?.shop?.town_city">{{order?.butcher?.shop?.town_city}}</p>
+                    <p class="font-2 p-0 m-0">{{order?.butcher?.shop?.post_code}}</p>
+                </div>
+            </div>
+            <div class="col-md bg-lightgray cust_info ml-md-1 mb-2">
+                <div class="px-2 pb-2" style="padding-top: 50px">
+                    <h5>{{getOrderCustName()}}</h5>
+                    <p class="font-2 p-0 m-0">Mob No: {{getOrderCustPhone()}}</p>
+                    <p class="font-2 p-0 m-0" *ngIf="getOrderAddressLine1() !== ''">{{getOrderAddressLine1()}}</p>
+                    <p class="font-2 p-0 m-0" *ngIf="getOrderAddressLine2() !== ''">{{getOrderAddressLine2()}}</p>
+                    <p class="font-2 p-0 m-0" *ngIf="getOrderCity() !== ''">{{getOrderCity()}}</p>
+                    <p class="font-2 p-0 m-0" *ngIf="getOrderPostCode() !== ''">{{getOrderPostCode()}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>

@@ -1,0 +1,116 @@
+@media screen and (max-width: 768px){
+    .menu_section{
+        margin-bottom: -1rem !important;
+    }
+
+    #menu_category_section{
+        margin-bottom: 0rem !important;
+        border: none !important;
+    }
+
+    #menu_list_section{
+        margin-bottom: 1rem !important;
+    }
+
+    #menu_shopcart_section{
+        border: none !important;
+        margin-bottom: 0rem !important; 
+    }
+}
+
+/**** star-rating cusomize ****/
+:host /deep/ star-rating div{
+    outline: none;
+}
+
+.menu_section{
+    margin-top: -2rem;
+}
+
+#menu_category_section{
+    background-color: #f3f2f2; 
+    margin-bottom: -1.5rem; 
+    border-right:1px solid #F6931D; 
+    padding:0.5rem;
+}
+
+#menu_list_section{
+    margin-bottom: -1.5rem;
+    padding:0;
+}
+
+#menu_shopcart_section{
+    position: relative;
+    border-left: 1px solid #f1f1f1; 
+    background: #f3f2f2; 
+    margin-bottom: -1.5rem; 
+    border-left:1px solid #F6931D; 
+    padding: 0;
+}
+
+.fixedcontent{
+    position: fixed;
+    top: 15px;
+}
+
+.absolutecontent_bottom{
+    position: absolute;
+    bottom: 0 !important;
+}
+
+.absolutecontent_top{
+    position: absolute;
+    top: 0;
+}
+
+/**** ng select cusomize ****/
+:host /deep/ ng-select .ng-control{
+    background-color: transparent !important;
+    height: 38px !important;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select .ng-value{
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select{
+    width: calc(100% + 4px) !important;
+    margin-left: -2px !important;
+}
+
+
+:host /deep/ ng-select .ng-input{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.marked{
+    background-color: #fcb35f !important;
+}
+
+:host /deep/ ng-select .ng-option{
+    background-color: #F6931D !important;
+    color: white !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel{
+    background-color: #F6931D !important;
+    border: none !important;
+    /* margin-left: -2px!important; */
+    /* margin-right: -4px!important; */
+    
+}
+
+:host /deep/ ng-select .ng-arrow{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-clear{
+    display: none !important;
+}
+
+

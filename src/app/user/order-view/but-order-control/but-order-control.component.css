@@ -1,0 +1,84 @@
+.order_status_block{
+    height: 100px;
+    width: 100%;
+}
+
+.order_status_block img{
+    height: 50px;
+    padding-left: 15px;
+}
+
+
+.order_history ul{
+    list-style: none;
+}
+
+.order_history ul li{
+    min-height: 60px;
+    border-right: 1px solid #b6b6b6;
+    border-top: 1px solid #b6b6b6;
+}
+
+.order_history ul li div:first-child{
+    color: white;
+    max-width: 60px;
+    min-width: 60px;
+}
+
+.order_history ul li:last-child{
+    border-bottom: 1px solid #b6b6b6;
+}
+
+
+
+
+/**** ng select cusomize ****/
+:host /deep/ ng-select .ng-control{
+    background-color: transparent !important;
+    height: 38px !important;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select .ng-value{
+    font-size: 1rem;
+    color: #535353;
+}
+
+:host /deep/ ng-select{
+    width: calc(100% + 4px) !important;
+    margin-left: -2px !important;
+}
+
+
+:host /deep/ ng-select .ng-input{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.marked{
+    background-color: #fcb35f !important;
+}
+
+:host /deep/ ng-select .ng-option{
+    background-color: #F6931D !important;
+    color: white !important;
+}
+
+:host /deep/ ng-select .ng-dropdown-panel{
+    background-color: #F6931D !important;
+    border: none !important;
+    /* margin-left: -2px!important; */
+    /* margin-right: -4px!important; */
+    
+}
+
+:host /deep/ ng-select .ng-arrow{
+    display: none !important;
+}
+
+:host /deep/ ng-select .ng-clear{
+    display: none !important;
+}
+

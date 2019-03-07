@@ -1,0 +1,57 @@
+<div id="delivery_infodetails_content">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <h4 class="my-4">How would you like to pay?</h4>
+            <div class="payment_method">
+                <div class="paymet_subtitle">Select a payment option</div>
+                <div class="row card_method">
+                    <div id="dropin-container"></div>
+                    <div id="card_btn"></div>
+                </div>
+                <div *ngIf="site_info.payment_settings.has_cash" class="row cash_method">
+                    <div class="col-xl-8 offset-xl-2 col-10 offset-1">
+                        <p (click)="selectPaymentMethod(2)">
+                            <input type="radio" id="cash_method" name="paymentmethod-group" [checked]="order_service.current_order.payment_method == 2">
+                            <label for="cash_method">
+                                <div class="cash_icon_wrap">
+                                    <img src="assets/images/cashicon.png" alt=""><br>
+                                </div>
+                            </label>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex my-2">
+                <div class="collection_timeinfo">
+                    <img *ngIf="order_service.current_order.delivery_option === 0" src="assets/images/collection_icon.png" alt="">
+                    <img *ngIf="order_service.current_order.delivery_option === 1" src="assets/images/delivery_icon.png" alt="">
+                </div>
+                <div class="color-orange d-flex align-items-end ml-2" *ngIf="order_service.current_order.delivery_option === 1">{{deliveryDateTimeInfo()}}</div>
+                <div class="color-orange d-flex align-items-end ml-2" *ngIf="order_service.current_order.delivery_option === 0">{{collectionDateTimeInfo()}}</div>
+            </div>
+            <div class="address" *ngIf="this.order_service.current_order.delivery_option === 0">
+                <h5>Collection from</h5>
+                <p *ngIf="order_service.current_order.butcher.shop.shop_name">{{order_service.current_order.butcher.shop.shop_name}}</p>
+                <p *ngIf="order_service.current_order.butcher.shop.address_line1">{{order_service.current_order.butcher.shop.address_line1}}</p>
+                <p *ngIf="order_service.current_order.butcher.shop.address_line2">{{order_service.current_order.butcher.shop.address_line2}}</p>
+                <p *ngIf="order_service.current_order.butcher.shop.town_city">{{order_service.current_order.butcher.shop.town_city}}</p>
+                <p *ngIf="order_service.current_order.butcher.shop.post_code">{{order_service.current_order.butcher.shop.post_code}}</p>
+            </div>
+            <div class="address" *ngIf="this.order_service.current_order.delivery_option === 1">
+                <h5>Delivery to</h5>
+                <p *ngIf="order_service.current_order.delivery_address.address_name">{{order_service.current_order.delivery_address.address_name}}</p>
+                <p *ngIf="order_service.current_order.delivery_address.address_line1">{{order_service.current_order.delivery_address.address_line1}}</p>
+                <p *ngIf="order_service.current_order.delivery_address.address_line2">{{order_service.current_order.delivery_address.address_line2}}</p>
+                <p *ngIf="order_service.current_order.delivery_address.city">{{order_service.current_order.delivery_address.city}}</p>
+                <p *ngIf="order_service.current_order.delivery_address.post_code">{{order_service.current_order.delivery_address.post_code}}</p>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1">
+                    <button class="mt-btn btn-lg btn-block font-1" (click)="placeMyOrder()">Place my order</button> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

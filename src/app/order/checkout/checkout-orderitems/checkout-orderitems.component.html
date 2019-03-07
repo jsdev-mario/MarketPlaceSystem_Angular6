@@ -1,0 +1,67 @@
+<div class="checkout_orderitemscontent"  *ngIf="selected_butcher && selected_butcher.shop">
+    <div class="butcher_section">
+        <div class="shop_intro_wrap text-center">
+            <div class="header-butcher-logo-wrap point" (click)="gotoOrderPage()">
+                <div class="header-butcher-deflogo" *ngIf="!selected_butcher || !selected_butcher.shop.shop_logo">
+                    <p>{{displayAbbreName()}}</p>
+                </div>
+                <img [src]="selected_butcher.shop.shop_logo" alt=""  *ngIf="selected_butcher && selected_butcher.shop.shop_logo">
+            </div>
+            <h5 class="point" style="margin: 0; padding: 0;" (click)="gotoOrderPage()">{{selected_butcher.shop.shop_name}}</h5>
+            <p class="font-2 mb-3">{{displayAddress()}}</p>
+            <p class="font-2" *ngIf="order_service.current_order.delivery_option === 0">
+                <span>Estimated Collection Time </span><br><span class="color-orange">{{collectionDateTimeInfo()}}</span>
+            </p>
+            <p class="font-2" *ngIf="order_service.current_order.delivery_option === 1">
+                <span>Estimated Delivery Time</span><br><span class="color-orange">{{deliveryDateTimeInfo()}}</span>
+            </p>
+        </div>
+    </div>
+    <div class="checkoutitems_section">
+        <h5 class="color-orange text-center mb-2">My Basket</h5>
+        <div class="order-items">
+            <div class="order-item" *ngFor="let order_item of order_service.current_order.order_items; let i = index;">
+                <div class="item-details">
+                    <small class="text-tink color-gray">{{order_item.count}} &times; {{displayMenuName(order_item.product)}}</small>
+                    <div class="ml-4">
+                        <small class="text-tink text-danger" *ngFor="let choice of order_item.choices">{{choice.name}}<br></small>
+                    </div>
+                </div>
+                <div class="price_content">
+                    <div class="color-dark-gray"><small>£ {{displayOrderItemPrice(order_item) | number: '1.2-2'}}</small></div>
+                </div>
+            </div>
+        </div>
+        <div class="price-cal-wrap">
+            <div class="row my-4">
+                <div class="col-12 save_wrap text-danger">
+                    <div *ngFor="let orderitem of order_service.current_order.offer_orderitems">
+                        <small>{{offer(orderitem)}}</small>
+                    </div>
+                    <small class="save_price" *ngIf="order_service.current_order.save_price > 0">You save: £ {{order_service.current_order.save_price | number:'1.2-2'}}</small>
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-7 color-gray"><small>Subtotal</small></div>
+                <div class="col-5 color-gray text-right"><small>£{{getSubTotalPrice() | number: '1.2-2'}}</small></div>
+            </div>
+            <div class="row my-2" *ngIf="order_service.current_order.order_items.length > 0 && order_service.current_order.service_charge != undefined">
+                <div class="col-7 color-gray"><small>Service charge</small></div>
+                <div class="col-5 color-gray text-right"><small>£ {{order_service.current_order.service_charge | number:'1.2-2'}}</small></div>
+            </div>
+            <div class="row my-2" *ngIf="order_service.current_order.delivery_option === 1">
+                <div class="col-7 color-gray" ><small>Delivery fee</small></div>
+                <div class="col-5 color-gray text-right"><small>{{getDeliveryFee()}}</small></div>
+            </div>
+            <div class="row my-2">
+                <div class="col-7 text-danger">Total</div>
+                <div class="col-5 text-danger text-right" *ngIf="!order_service.current_order.service_charge">£{{getTotalPrice() | number: '1.2-2'}}</div>
+                <div class="col-5 text-danger text-right" *ngIf="order_service.current_order.service_charge">£{{getTotalPrice() + order_service.current_order.service_charge | number: '1.2-2'}}</div>
+            </div>
+        </div>
+        <div class="my-4" *ngIf="order_service.current_order.note">
+            <p class="color-orange mb-2">Instructions for the butcher</p>
+            <small class="color-gray line_height_1">{{order_service.current_order.note}}</small>
+        </div>
+    </div>
+</div>
