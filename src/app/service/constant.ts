@@ -1,5 +1,5 @@
 export default {
-    SERVER_URL: 'http://xxxx.xxx/apis',
+    SERVER_URL: 'http://xxxx.xxx',
     // SERVER_URL: '/apis',
     SITE_NAME: 'Meat Hut',
     userType: {
